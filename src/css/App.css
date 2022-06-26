@@ -36,3 +36,61 @@
     transform: rotate(360deg);
   }
 }
+
+.communitypage-container {
+  border-bottom: 1px solid grey;
+  width: 500px;
+}
+
+.communitypage-container__top {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.communitypage-top__left > h2 {
+  margin-bottom: 0px;
+}
+
+.communitypage-content__thumb {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.communitypage-bottom__content {
+  display: flex;
+}
+
+.communitypage-bottom__detail {
+  display: flex;
+  justify-content: end;
+}
+
+.communitypage-container__user {
+  width: 500px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.user__img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.communitypage-container__title {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 30px;
+}
+
+.communitypage-container__content {
+  display: flex;
+  justify-content: flex-start;
+  height: 100px;
+  margin-top: 30px;
+}
