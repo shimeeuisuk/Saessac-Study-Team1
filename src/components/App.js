@@ -1,9 +1,16 @@
-import '../css/App.css';
+import "../css/App.css";
+import PostDetail from "./PostDetail";
+import PostList from "./PostList";
 
 function App() {
   return (
     <div className="App">
-      Welcome Saessac!
+      <div>
+        <PostList />
+      </div>
+      <div>
+        <PostDetail />
+      </div>
     </div>
   );
 }
