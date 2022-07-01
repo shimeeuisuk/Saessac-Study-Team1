@@ -1,26 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 export default function PostList() {
-  const list = [1, 2, 3, 4];
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://34.168.215.145/topic/list").then((res) => {
+      setList([...res.data]);
+      console.log(res.data);
+    });
+  }, []);
   return (
     <>
       <div>
-        {list.map(() => {
-          return <PostBox />;
+        {list.map((el) => {
+          return <PostBox data={el} />;
         })}
       </div>
     </>
   );
 }
 
-function PostBox() {
+function PostBox(props) {
+  console.log(props.data);
   let [like, setLike] = useState(0);
+  // const date = new Date(props.data.created_at).toLocaleDateString();
+  // const time = new Date(props.data.created_at).toLocaleTimeString();
+  // const dateTime = `${date} ${time}`;
+
   return (
     <>
       <div className="communitypage-container">
         <div className="communitypage-container__top">
           <div className="communitypage-top__left">
-            <h2>제목이다</h2>
-            <div>2022.06.25</div>
+            <h2>{props.data.topicTitle}</h2>
+            <div>{new Date(props.data.created_at).toLocaleString()}</div>
           </div>
           <div className="communitypage-top__right">
             <span
@@ -37,16 +51,21 @@ function PostBox() {
         <div className="communitypage-container__bottom">
           <div className="communitypage-bottom__content">
             <div className="communitypage-content__img">
-              <img className="communitypage-content__thumb" src="img/qq.jpeg" />
+              <img
+                className="communitypage-content__thumb"
+                src={`http://34.168.215.145/${props.data.userPicture}`}
+              />
             </div>
             <div className="communitypage-content__preview">
-              <span>씌미씌미</span>
+              <span>{props.data.userID}</span>
               <span> </span>
-              <span>미리보기내용 솰라솰라솰라 미리보기내용</span>
+              <span>{props.data.topicContents}</span>
             </div>
           </div>
           <div className="communitypage-bottom__detail">
-            <span>상세더보기</span>
+            <Link to={`/postdetail/${props.data.tid}`}>
+              <span>상세더보기</span>
+            </Link>
           </div>
         </div>
       </div>
