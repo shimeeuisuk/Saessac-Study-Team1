@@ -4,22 +4,27 @@ function Main() {
   const apiKey = "c804c2461e2d3849e26d07926609f755";
   const [datas, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  const [location, setLocation] = useState(null);
 
   const getLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      (data) => {
-        setLatitude(data.coords.latitude);
-        setLongitude(data.coords.longitude);
-      },
-      () => {
-        console.log("err");
-      }
-    );
-  };
+    navigator.geolocation.getCurrentPosition((data)=> {
+      setLocation({latitude: data.coords.latitude, longitude: data.coords.longitude})
+    }, () => {
+      setLocation({latitude: 'err', longitude: 'err'})
+    })
+  }
 
-  const getData = () => {
+  const getNoLocationData = () => {
+    setLoading(true);
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?id=1838524&appid=${apiKey}`)
+    .then(res => res.json())
+    .then(data => setData(data))
+    .then(() => setLoading(false))
+    .catch(() => {console.log('err')})
+  }
+
+  const getLocationData = () => {
     setLoading(true);
     setTimeout(() => {
       fetch(
@@ -35,12 +40,10 @@ function Main() {
   };
 
   useEffect(() => {
-    getLocation();
-  }, []);
-
-  useEffect(() => {
-    if (latitude !== null) getData();
-  }, [latitude]);
+    getLocation()
+    if(location.latitude !== null && location.latitude !== 'err') getLocationData()
+    if(location.latitude === 'err') getNoLocationData()
+  }, [location.latitude])
 
   if (loading) return null;
 
