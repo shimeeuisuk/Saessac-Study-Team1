@@ -69,12 +69,22 @@ function Main() {
         <p>{datas.weather[0].main}</p>
       </div>
       <div className="main-container__bottom">
-        <button>
-          <Link to="/postlist">러닝메이트 찾기</Link>
-        </button>
-        <button>
-          <Link to="/postlist">러닝장소 추천</Link>
-        </button>
+        <div className="main-bottom__left">
+          <div className="main-bottom__left__img">
+            <Link to="/postlist">
+              <p>러닝메이트 구하기</p>
+              <img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/YiG/image/ookjc5A76DBvYx1s08f9MpeINJk" />
+            </Link>
+          </div>
+        </div>
+        <div className="main-bottom__right">
+          <div className="main-bottom__right__img">
+            <Link to="/postlist">
+              <p>러닝장소 추천</p>
+              <img src="https://img4.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202106/30/joongang/20210630091042255rjdv.jpg" />
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
