@@ -4,7 +4,7 @@ function Main() {
   const apiKey = "c804c2461e2d3849e26d07926609f755";
   const [datas, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState({latitude: null, longitude: null});
 
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((data)=> {
@@ -26,9 +26,8 @@ function Main() {
 
   const getLocationData = () => {
     setLoading(true);
-    setTimeout(() => {
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&units=metric`
       )
         .then((res) => res.json())
         .then((data) => setData(data))
@@ -36,8 +35,8 @@ function Main() {
         .catch(() => {
           console.log("err");
         });
-    }, 300);
-  };
+    };
+
 
   useEffect(() => {
     getLocation()
@@ -47,15 +46,21 @@ function Main() {
 
   if (loading) return null;
 
-  console.log(datas.name, latitude, longitude);
+  console.log(datas.name, location.latitude, location.longitude);
   console.log(datas.main.temp);
 
   return (
     <div className="main-container">
-      <p>{datas.name}</p>
-      <p>{datas.main.temp}</p>
-      <p>{datas.weather[0].main}</p>
+      <div className="main-weather">
+        <p>{datas.name}</p>
+        <p>{datas.main.temp}</p>
+        <p>{datas.weather[0].main}</p>
+      </div>
+      <div className="main-container__bottom">
+        <div>러닝메이트 찾기</div>
+      </div>
     </div>
+
   );
 }
 
