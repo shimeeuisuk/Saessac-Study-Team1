@@ -30,7 +30,10 @@ function PostContent(props) {
       <section className="communitypage-container">
         <div className="communitypage-container__user">
           <div className="communitypage-user__img">
-            <img className="user__img" src="img/qq.jpeg" />
+            <img
+              className="user__img"
+              src={`http://34.168.215.145/${props.detail.userPicture}`}
+            />
           </div>
           <div className="communitypage-user__username">
             <span>{props.detail.userID}</span>
