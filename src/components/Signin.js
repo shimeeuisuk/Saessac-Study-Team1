@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { setLoginCookie } from '../lib/cookie'
 
 const axios = require('axios')
 
 function Signin() {
   const [datas, setData] = useState({})
+  let navigate = useNavigate();
 
   const getUserID = (e) => {
     setData({...datas, userid: e.target.value})
@@ -23,14 +25,15 @@ function Signin() {
       })
       const data = res.data
 
-      console.log(data.uid)
+      setLoginCookie(data.token)
+      navigate('/');
     } catch(err){
       console.log(err)
     }
   }
 
   const pushEnter = (e) => {
-    if(e.keyCode === 13) trySignin()
+    if(e.key === 'Enter') trySignin()
   }
 
   return(
