@@ -6,6 +6,7 @@ import Main from "./Main";
 import PostList from "./PostList";
 import PostDetail from "./PostDetail";
 import MyPage from "./MyPage";
+import PostWrite from "./PostWrite";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/postlist" element={<PostList />}></Route>
           <Route path="/postdetail/:id" element={<PostDetail />}></Route>
+          <Route path="/postwrite" element={<PostWrite />}></Route>
         </Routes>
         <Link to="/">
           <p>메인</p>
@@ -35,8 +37,8 @@ function App() {
         <Link to="/postlist">
           <p>글 목록</p>
         </Link>
-        <Link to="/postdetail">
-          <p>글 내용</p>
+        <Link to="/postwrite">
+          <p>글 작성</p>
         </Link>
       </BrowserRouter>
     </div>
