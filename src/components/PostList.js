@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function PostList() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
     axios.get("http://34.168.215.145/topic/list").then((res) => {
       setList([...res.data]);
-      console.log(res.data);
-    });
+    }); //데이터를 가지고 옴
   }, []);
   return (
     <>
