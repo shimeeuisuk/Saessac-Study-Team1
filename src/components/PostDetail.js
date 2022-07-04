@@ -1,33 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 export default function PostDetail() {
+  const [detail, setDetail] = useState({});
+  let params = useParams();
+  console.log(params);
+
+  useEffect(() => {
+    axios.get(`http://34.168.215.145/topic/${params.id}`).then((res) => {
+      const data = res.data[0];
+      setDetail({ ...data });
+    });
+  }, []);
+
   return (
     <>
-      <PostContent />
+      <PostContent detail={detail} />
       <PostReply />
     </>
   );
 }
 
-function PostContent() {
+function PostContent(props) {
   let [like, setLike] = useState(0);
+  console.log(props.detail);
   return (
     <>
       <section className="communitypage-container">
         <div className="communitypage-container__user">
           <div className="communitypage-user__img">
-            <img className="user__img" src="img/qq.jpeg" />
+            <img
+              className="user__img"
+              src={`http://34.168.215.145/${props.detail.userPicture}`}
+            />
           </div>
           <div className="communitypage-user__username">
-            <span>씌미씌미</span>
+            <span>{props.detail.userID}</span>
             <div>2022.06.25</div>
           </div>
         </div>
-        <div className="communitypage-container__title">제목이다</div>
+        <div className="communitypage-container__title">
+          {props.detail.topicTitle}
+        </div>
         <div className="communitypage-container__content">
-          나랑 같이뛰지 않을래~? 응 안뛰어~ 반포 한강 공원에서 런닝메이트
-          구합니다~ 뛰고 싶은 열정만 있다면 7월 1일 세빛둥둥섬 앞에서 오후 7시에
-          만나요 닉네임 씌미를 찾으세요 어스름한 저녁 반포대교 분수를 보며 같이
-          뛰어요~!!
+          {props.detail.topicContents}
         </div>
         <div className="commuitypage-container__reaction">
           <span

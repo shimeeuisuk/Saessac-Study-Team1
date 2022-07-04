@@ -1,96 +1,91 @@
-const { useState } = require("react");
-
-const api = {
-  key: "c804c2461e2d3849e26d07926609f755",
-  base: "https://api.openweathermap.org/data/2.5/",
-};
+import { Link } from "react-router-dom";
+import "../css/Main.css";
+const { useState, useEffect } = require("react");
 
 function Main() {
-  const [query, setQuery] = useState("");
-  const [weather, setWeather] = useState({});
+  const apiKey = "c804c2461e2d3849e26d07926609f755";
+  const [datas, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [location, setLocation] = useState({ latitude: null, longitude: null });
 
-  const search = (e) => {
-    if (e.key === "Enter") {
-      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-        .then((res) => res.json())
-        .then((result) => {
-          setWeather(result);
-          setQuery("");
-          console.log(result);
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (data) => {
+        setLocation({
+          latitude: data.coords.latitude,
+          longitude: data.coords.longitude,
         });
-    }
+      },
+      () => {
+        setLocation({ latitude: "err", longitude: "err" });
+      }
+    );
   };
 
-  const dateBuilder = (d) => {
-    let months = [
-      "January",
-      "February",
-      "March",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
+  const getNoLocationData = () => {
+    setLoading(true);
 
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    let day = days[d.getDay()];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear();
-
-    return `${day} ${date} ${month} ${year}`;
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?id=1838524&appid=${apiKey}`
+    )
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .then(() => setLoading(false))
+      .catch(() => {
+        console.log("err");
+      });
   };
+
+  const getLocationData = () => {
+    setLoading(true);
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&units=metric`
+    )
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .then(() => setLoading(false))
+      .catch(() => {
+        console.log("err");
+      });
+  };
+
+  useEffect(() => {
+    getLocation();
+    if (location.latitude !== null && location.latitude !== "err")
+      getLocationData();
+    if (location.latitude === "err") getNoLocationData();
+  }, [location.latitude]);
+
+  if (loading) return null;
+
+  console.log(datas.name, location.latitude, location.longitude);
+  console.log(datas.main.temp);
 
   return (
-    <div
-      className={
-        typeof weather.main != "undefined"
-          ? weather.main.temp > 16
-            ? "app warm"
-            : "app"
-          : "app"
-      }
-    >
-      <main>
-        <div className="search-box">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Search..."
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
-            onKeyPress={search}
-          />
-        </div>
-        {typeof weather.main != "undefined" ? (
-          <div>
-            <div className="location- box">
-              <div className="location">
-                {weather.name}. {weather.sys.countyu}
-              </div>
-              <div className="date">{dateBuilder(new Date())}</div>
-            </div>
-            <div className="weather-box">
-              <div className="temp">{Math.round(weather.main.temp)}°C</div>
-              <div className="weather">{weather.weather[0].main}</div>
-            </div>
+    <div className="main-container">
+      <div className="main-weather">
+        <p>{datas.name}</p>
+        <p>{datas.main.temp}</p>
+        <p>{datas.weather[0].main}</p>
+      </div>
+      <div className="main-container__bottom">
+        <div className="main-bottom__left">
+          <div className="main-bottom__left__img">
+            <Link to="/postlist">
+              <p>러닝메이트 구하기</p>
+              <img src="https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/YiG/image/ookjc5A76DBvYx1s08f9MpeINJk" />
+            </Link>
           </div>
-        ) : (
-          ""
-        )}
-      </main>
+        </div>
+        <div className="main-bottom__right">
+          <div className="main-bottom__right__img">
+            <Link to="/postlist">
+              <p>러닝장소 추천</p>
+              <img src="https://img4.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202106/30/joongang/20210630091042255rjdv.jpg" />
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
