@@ -26,7 +26,7 @@ function MyPage() {
   
   // 회원정보 조회
   useEffect( () => {
-    axios.get(`http://34.168.215.145/user/25`).then((res) => {
+    axios.get(`http://34.168.215.145/user/1`).then((res) => {
       setUser(...res.data);
       setNickname(res.data[0].nickName);
       setIntroduce(res.data[0].info);
@@ -109,6 +109,7 @@ function MyPage() {
   const submitChangedPw = () => {
     if(currentPw === newPw && newPw === newPwCheck) {
       prompt('현재비밀번호와같습니다'); //좀더 이쁘게 만들기(modal창)
+      return;
     }
     if(currentPw !== newPw && newPw === newPwCheck) {
     axios.put(`http://34.168.215.145/user/password/${user.uid}?uid=${user.uid}`, password)
@@ -136,45 +137,50 @@ const deleteAccountHandler = () => {
 }
 
   return (
-    <>
+    <div className="myInfo-container">
 {/* section1 */}
       <section className="myInfo-1">
         {/* 1.이미지 수정 & 제거 */}
         <div className="thumbnail-area">
           <img src={`http://34.168.215.145/${user.userPicture}`} width="50px" alt="profile" />
-          <button className="myInfo-btn">이미지 수정</button>
+          <button className="myInfo-btn greenbtn">이미지 수정</button>
           <button className="myInfo-btn">이미지 제거</button>
         </div>
         {/* 2. 닉네임 수정, 자기소개, 주활동지역 */}
-        <div className="info-area">
+        <div className="contents-area">
           {/* 마이페이지 첫 렌더링 시 --> (수정버튼만 떠야함)*/}
           {/* 수정버튼 클릭시 --> (저장버튼이 떠야함) */}
           {editPopup ? (
-            <form className="myInfo-nickNameInputForm">
-            <input 
-            type="text"
-            placeholder="바꿀 닉네임을 작성해주세요"
-            className="myInfo-newNickName"
-            defaultValue={nickname}
-            onChange={handleNicknameChange}></input>
-            <input
-            type="text"
-            defaultValue={introduce}
-            onChange={handleIntroChange}
-            placeholder="자기 소개를 작성해주세요"
-            ></input>
-            <div className="button-wrapper">
-              <button className="myInfo-btn" onClick={() => {
-                toggleEiditPopup();
-                submitNickname();
-                }} >저장</button>
+            <div className="contents-area-2">
+              <form className="myInfo-1-inputForm">
+              <input 
+              type="text"
+              placeholder="바꿀 닉네임을 작성해주세요"
+              className="myInfo-inputNickname"
+              defaultValue={nickname}
+              onChange={handleNicknameChange}></input>
+              <input
+              type="text"
+              placeholder="자기 소개를 작성해주세요"
+              className="myInfo-inputIntroduce"
+              defaultValue={introduce}
+              onChange={handleIntroChange}
+              ></input>
+              <div className="button-wrapper">
+                <button className="myInfo-btn greenbtn" onClick={() => {
+                  toggleEiditPopup();
+                  submitNickname();
+                  }} >저장</button>
+              </div>
+              </form>
             </div>
-          </form>
           ) : (
-            <div>
-              <p>{user.userID}</p>
-              <h2>{nickname}</h2>
-              <p>{introduce}</p>
+            <div className="contents-area-1">
+              <div className="nameAndId-wrapper">
+                <span>{nickname} </span>
+                <span>{user.userID}</span>
+              </div>
+              <p className="introduce">{introduce}</p>
               <button className="myInfo-btnUnderline" onClick={toggleEiditPopup}>수정</button>
             </div>
           )}
@@ -208,35 +214,32 @@ const deleteAccountHandler = () => {
           </div>
           <div className="contents-wrapper">
             { pwPopup ? (
-                <form className="myInfo-passwordForm">
-                <ul>
-                  <li>
+              <form className="passwordForm">
+                <ul className="passwordForm-container">
+                  <li className="passwordForm-wrapper">
                     <div className="description">현재 비밀번호</div>
                     <input
                     type="password"
-                    className="myInfo-presentPassword" 
+                    className="passwordInput" 
                     value={currentPw} 
                     onChange={inputCurrentPw}></input>
                     {currentPwMsg}
                   </li>
-                  <li>
+                  <li className="passwordForm-wrapper">
                     <div className="description">새 비밀번호</div>
-                    <div className="error-description" color="red">
-                      
-                    </div>
                     <input
                     type="password"
-                    className="myInfo-newPassword" 
+                    className="passwordInput" 
                     value={newPw}
                     onChange={inputNewPw}
                     ></input>
                     {pwMsg}
                   </li>
-                  <li>
+                  <li className="passwordForm-wrapper">
                     <div className="description">새 비밀번호 확인</div>
                     <input
                     type="password"
-                    className="myInfo-newPassword"
+                    className="passwordInput"
                     value={newPwCheck}
                     onChange={inputNewPwCheck}
                     ></input>
@@ -244,49 +247,53 @@ const deleteAccountHandler = () => {
                   </li>
                 </ul>
                 <div className="button-wrapper">
-                  <button color="teal" className="myInfo-btn" onClick={() => {
+                  <button color="teal" className="myInfo-btn greenbtn" onClick={() => {
                     togglePwPopup();
                     submitChangedPw();
-                    }}>저장</button>
+                    }}
+                    >저장</button>
                 </div>
               </form>
             ) : (
-              <div>
-                <ul className="myInfo-password"></ul>
+              <div className="button-wrapper">
                 <button className="myInfo-btnUnderline" onClick={togglePwPopup}>변경</button>
               </div>
             )}
-            
-            
           </div>
         </div>
       {/* 2. 회원정보 삭제 */}
         <div className="myInfo-2-wrapper">
           <div className="title-wrapper">
             <h3>회원정보 삭제</h3>
-            { modal ?
-            ( <div className="deleteAcount-background" onClick={modalHandler}>
-                  <div className="deleteAcount-container">
-                    <div className="deleteAcount-wrapper">
-                        <h3>회원정보 삭제</h3>
-                        <div className="deleteAcount-msg">정말로 회원정보를 삭제하시겠습니까?</div>
-                    </div>  
+          </div>
+          <div className="contents-wrapper">
+          <div className="deleteAcount-container">
+            <div className="redbutton-area">
+              <button className="myInfo-btn redbtn" onClick={modalHandler}>회원정보 삭제</button>
+            </div>
+            
+            { modal ? (
+                <div className="deleteAcount-background" onClick={modalHandler}>
+                  <div className="modalView">
+                      <h3>회원정보 삭제</h3>
+                      <div className="deleteAccount-msg">정말로 회원정보를 삭제하시겠습니까?</div>
                       <div className="button-area">
                         <button className="myInfo-btn" onClick={modalHandler}>취소</button>
-                        <button className="myInfo-btn" onClick={deleteAccountHandler}>확인</button>
+                        <button className="myInfo-btn greenbtn" onClick={deleteAccountHandler}>확인</button>
                       </div>
                   </div>
-              </div>
+                </div>
               ) : (
-            <div className="contents-wrapper">
-            <button color="red" className="myInfo-btn" onClick={modalHandler}>회원정보 삭제</button>
+                null
+              )}
             </div>
-          )}
-          <div className="description">회원정보 삭제시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>
+          </div>
         </div>
+        <div className="description-area">
+          <div className="description">회원정보 삭제시 작성하신 포스트 및 댓글이 모두 삭제되며 복구되지 않습니다.</div>    
         </div>
       </section>
-    </>
+    </div>
   )
 }
 export default MyPage;

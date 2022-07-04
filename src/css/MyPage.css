@@ -1,0 +1,270 @@
+* {
+  box-sizing: border-box;
+  padding:0;
+  margin:0;
+}
+
+.myInfo-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* section 1 */
+.myInfo-1 {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+}
+
+/* 프로필 사진 */
+.thumbnail-area {
+  flex-basis: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  height: 250px;
+}
+
+.thumbnail-area > img {
+  width: 9rem;
+  height: 9rem;
+  border-radius: 100%;
+}
+
+/* 버튼 스타일(전역) */
+.myInfo-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  margin:0.5rem 0 0 0;
+  padding: 0.5rem 2rem;
+  cursor: grab;
+  border:rgb(255, 255, 255);
+  border-radius: 0.2rem;
+  transition:0.15s; 
+  background-color: rgb(255, 255, 255);
+  color:#0EA958;
+}
+
+.myInfo-btn:hover {
+  background: #e6e7e7;
+}
+
+.greenbtn {
+  background-color: #0EA958;
+  color:rgb(255, 255, 255);
+}
+
+.greenbtn:hover {
+  background: #68c696;
+}
+
+.myInfo-btnUnderline {
+  font-size: 1rem;
+  text-decoration: underline;
+  color:#0EA958;
+  background-color: white;
+  border: none;
+}
+
+button.myInfo-btnUnderline {
+  cursor: pointer;
+  transition:0.1s; 
+}
+button.myInfo-btnUnderline:hover {
+  color: #28de80;
+}
+
+/* 닉네임 & 자기소개 (첫화면)*/
+.contents-area-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 2rem;
+}
+.nameAndId-wrapper {
+  margin-top:1rem;
+}
+
+.nameAndId-wrapper span:nth-of-type(1) {
+  font-size: 2.5rem;
+  font-weight: bold;
+
+}
+.introduce {
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: rgb(176, 176, 176);
+  margin: 1rem 0;
+}
+
+
+
+/* 닉네임 & 자기소개 (콘텐츠 수정화면) */
+.contents-area-2 {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+.myInfo-1-inputForm {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-evenly;
+  align-items: flex-end;
+}
+
+.myInfo-inputNickname {
+  font-size: 1.5rem;
+  /* font-weight: bold; */
+  color:rgb(109, 106, 106);
+  width: 400px;
+  height: 40px;
+  border: solid rgb(197, 193, 193) 1px;
+  border-radius: 3px;
+
+}
+
+.myInfo-inputIntroduce{
+  font-size: 1rem;
+  color:rgb(109, 106, 106);
+  width: 400px;
+  height: 30px;
+  border: solid rgb(197, 193, 193) 1px;
+  border-radius: 3px;
+}
+
+
+
+
+/* section 2 */
+.myInfo-2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  justify-content:center;
+  align-items: center;
+}
+
+.myInfo-2-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 630px;
+}
+
+.title-wrapper {
+  flex-basis: 150px;
+  margin: 1rem;
+  font-size: 1rem;
+}
+.contents-wrapper {
+  flex-basis: 450px;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* 비밀번호 변경 */
+
+.passwordForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.passwordForm-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.passwordForm-wrapper{
+  display: flex;
+  flex-direction:column;
+  list-style: none;
+}
+
+.passwordForm-wrapper p {
+  color:gray;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.description {
+  font-size: 1rem;
+  color:rgb(131, 129, 129);
+  text-align: left;
+  margin-top: 0.5rem;
+}
+.passwordInput {
+  font-size: 1.5rem;
+  border: rgb(166, 163, 163) solid 1px;
+  border-radius: 3px;
+  padding-left: 0.5rem;
+  width:400px;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+/* 회원정보 삭제 */
+.redbtn {
+  background-color: rgb(247, 103, 103);
+  color:white;
+  margin: 0;
+}
+
+
+.deleteAcount-container {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteAcount-background {
+  position: fixed;
+  width:100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.modalView {
+  height: 12rem;
+  width: 20rem;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.modalView > h3 {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.deleteAccount-msg {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.button-area {
+  display: flex;
+  flex-direction: row;
+  justify-content:right;
+}
+
+.description-area {
+  padding-right:4rem;
+
+}
