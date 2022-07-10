@@ -7,7 +7,7 @@ import PostList from "./PostList";
 import PostDetail from "./PostDetail";
 import MyPage from "./MyPage";
 import PostWrite from "./PostWrite";
-
+import { PostListPage } from "page/Post/PostListPage";
 function App() {
   return (
     <div className="App">
@@ -18,7 +18,7 @@ function App() {
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/signin" element={<Signin />}></Route>
           <Route path="/mypage" element={<MyPage />}></Route>
-          <Route path="/postlist" element={<PostList />}></Route>
+          <Route path="/postlist" element={<PostListPage />}></Route>
           <Route path="/postdetail/:id" element={<PostDetail />}></Route>
           <Route path="/postwrite" element={<PostWrite />}></Route>
         </Routes>
@@ -35,7 +35,7 @@ function App() {
           <p>마이페이지</p>
         </Link>
         <Link to="/postlist">
-          <p>글 목록</p>
+          <p>글 목록 페이지</p>
         </Link>
         <Link to="/postwrite">
           <p>글 작성</p>
