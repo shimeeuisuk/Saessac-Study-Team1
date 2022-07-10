@@ -7,6 +7,7 @@ import PostList from "./PostList";
 import PostDetail from "./PostDetail";
 import MyPage from "./MyPage";
 import PostWrite from "./PostWrite";
+import { PostListPage } from "page/Post/PostListPage";
 import Navbar from "./Navbar";
 import RequireAuth from "./RequireAuth"
 import { useEffect } from 'react';
@@ -15,6 +16,7 @@ import { setSignState } from '../action/action'
 import { getLoginCookie } from '../lib/cookie'
 
 const axios = require('axios')
+
 function App() {
   const dispatch = useDispatch()
 
@@ -56,7 +58,7 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route path="/postlist" element={<PostList />}></Route>
+        <Route path="/postlist" element={<PostListPage />}></Route>
         <Route path="/postdetail/:id" element={<PostDetail />}></Route>
         <Route path="/postwrite" element={<PostWrite />}></Route>
       </Routes>
