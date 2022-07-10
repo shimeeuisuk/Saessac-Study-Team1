@@ -4,7 +4,7 @@ const cookies = new Cookies()
 
 export const setLoginCookie = (token) => {
   let expireTime = new Date();
-  expireTime.setMinutes(new Date().getMinutes() + 10)
+  expireTime.setMinutes(new Date().getMinutes() + 100)
 	return cookies.set("token", token, { path: "/", expires: expireTime })
 }
 
