@@ -29,9 +29,13 @@
 }
 
 .thumbnail-area > img {
-  width: 9rem;
-  height: 9rem;
+  width: 10rem;
+  height: 10rem;
   border-radius: 100%;
+}
+
+.contents-area {
+  flex-basis: 450px;
 }
 
 /* 버튼 스타일(전역) */
@@ -82,7 +86,9 @@ button.myInfo-btnUnderline:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 2rem;
+  margin: 1rem 0 0 2rem;
+  
+
 }
 .nameAndId-wrapper {
   margin-top:1rem;
@@ -94,10 +100,12 @@ button.myInfo-btnUnderline:hover {
 
 }
 .introduce {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 500;
-  color: rgb(176, 176, 176);
-  margin: 1rem 0;
+  color: rgb(126, 123, 123);
+  margin: 0.5rem 0;
+  text-align: left;
+  max-height: 80px;
 }
 
 
@@ -106,7 +114,7 @@ button.myInfo-btnUnderline:hover {
 .contents-area-2 {
   display: flex;
   flex-direction: column;
-  margin-left: 2rem;
+  margin: 1rem 0 0 2rem;
 }
 .myInfo-1-inputForm {
   height: 180px;
@@ -136,8 +144,79 @@ button.myInfo-btnUnderline:hover {
   border-radius: 3px;
 }
 
+/* 주활동지역 */
+.favoriteLocations-container {
+  display: flex;
+  flex-direction: row;
+  /* margin-left: 2rem; */
+  /* align-items: flex-start; */
+  width: 630px;
+}
 
+.favoriteLocations-title-wrapper {
+  flex-basis: 150px;
+  margin: 1rem;
+  font-size: 1rem;
+  text-align: left;
+}
 
+.favoriteLocations-contents {
+  display: flex;
+  flex-direction: row;
+  border: solid rgb(197, 193, 193) 1px;
+  border-radius: 6px;
+  align-items: center;
+  justify-content:flex-start;
+  padding-left: 8px;
+  width:450px;
+  flex-wrap: wrap;
+
+}
+
+ul.favoriteLocations {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+li.favoriteLocation {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  list-style: none;
+  background-color: #0EA958;
+  margin: 0 8px 8px 0;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.favoriteLocation span.loc-close-icon{
+  /* display: block; */
+  margin-left: 8px;
+  background-color:#fff;
+  color:#0EA958;
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+.favoriteLocation-input {
+  border: none;
+  font-size: 0.8rem;
+  height: 35px;
+  flex: 1;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
 
 /* section 2 */
 .myInfo-2 {
@@ -152,12 +231,14 @@ button.myInfo-btnUnderline:hover {
   display: flex;
   flex-direction: row;
   width: 630px;
+  
 }
 
 .title-wrapper {
   flex-basis: 150px;
   margin: 1rem;
   font-size: 1rem;
+  text-align: left;
 }
 .contents-wrapper {
   flex-basis: 450px;
@@ -177,6 +258,7 @@ button.myInfo-btnUnderline:hover {
 .passwordForm-container {
   display: flex;
   flex-direction: column;
+  padding-top: 1rem;
 }
 
 .passwordForm-wrapper{
@@ -195,7 +277,7 @@ button.myInfo-btnUnderline:hover {
   font-size: 1rem;
   color:rgb(131, 129, 129);
   text-align: left;
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
 }
 .passwordInput {
   font-size: 1.5rem;
@@ -265,6 +347,6 @@ button.myInfo-btnUnderline:hover {
 }
 
 .description-area {
-  padding-right:4rem;
+  padding-right:7rem;
 
 }
