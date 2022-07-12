@@ -1,7 +1,7 @@
 import "../css/App.css";
 import { Routes, Route, Link } from "react-router-dom";
-import Signup from "./Signup";
-import Signin from "./Signin";
+import Signup from "../page/Sign/Signup";
+import Signin from "../page/Sign/Signin";
 import Main from "./Main";
 import PostList from "./PostList";
 import PostDetail from "./PostDetail";
@@ -10,14 +10,16 @@ import PostWrite from "./PostWrite";
 import { PostListPage } from "page/Post/PostListPage";
 import Navbar from "./Navbar";
 import RequireAuth from "./RequireAuth"
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSignState } from '../action/action'
 import { getLoginCookie } from '../lib/cookie'
+import Loading from '../components/Loading'
 
 const axios = require('axios')
 
 function App() {
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -25,9 +27,12 @@ function App() {
       async () => {
         const res = await axios.get('http://34.168.215.145/user/checklogin', {headers: {authorization: getLoginCookie()}})
         dispatch(setSignState(res.data.msg))
+        setLoading(false)
       }
     )()
   })
+  
+  if(loading) return <Loading></Loading>
 
   return (
     <div className="App">
