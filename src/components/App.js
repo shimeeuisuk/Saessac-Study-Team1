@@ -5,7 +5,7 @@ import Signin from "./Signin";
 import Main from "./Main";
 import PostList from "./PostList";
 import PostDetail from "./PostDetail";
-import MyPage from "./MyPage";
+import MyPage from "../page/MyPage/MyPage";
 import PostWrite from "./PostWrite";
 import { PostListPage } from "page/Post/PostListPage";
 import Navbar from "./Navbar";
