@@ -4,15 +4,16 @@
   margin:0;
 }
 
-.myInfo-container {
+.mypage-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 
 /* section 1 */
-.myInfo-1 {
+.mypage-container__top {
   display: flex;
   flex-direction: row;
   width: 600px;
@@ -69,7 +70,7 @@
   font-size: 1rem;
   text-decoration: underline;
   color:#0EA958;
-  background-color: white;
+  background-color: #EEEEEE;
   border: none;
 }
 
@@ -127,21 +128,23 @@ button.myInfo-btnUnderline:hover {
 .myInfo-inputNickname {
   font-size: 1.5rem;
   /* font-weight: bold; */
-  color:rgb(109, 106, 106);
+  color:rgb(82, 79, 79);
   width: 400px;
   height: 40px;
   border: solid rgb(197, 193, 193) 1px;
   border-radius: 3px;
+  background-color: #EEEEEE;
 
 }
 
 .myInfo-inputIntroduce{
   font-size: 1rem;
-  color:rgb(109, 106, 106);
+  color:rgb(82, 79, 79);
   width: 400px;
   height: 30px;
   border: solid rgb(197, 193, 193) 1px;
   border-radius: 3px;
+  background-color: #EEEEEE;
 }
 
 /* 주활동지역 */
@@ -216,10 +219,20 @@ li.favoriteLocation {
   height: 35px;
   flex: 1;
   margin: 0.5rem 0.5rem 0.5rem 0;
+  background-color: #EEEEEE;
+  color:rgb(82, 79, 79);
+
+}
+.favoriteLocation-input:focus {
+  outline: transparent;
+}
+
+.favoriteLocation-input:focus-within {
+  border: 1px solid (82, 79, 79);
 }
 
 /* section 2 */
-.myInfo-2 {
+.mypage-container__bottom {
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
@@ -275,7 +288,7 @@ li.favoriteLocation {
 
 .description {
   font-size: 1rem;
-  color:rgb(131, 129, 129);
+  color:rgb(129, 126, 126);
   text-align: left;
   margin-top: 0.2rem;
 }
@@ -285,6 +298,7 @@ li.favoriteLocation {
   border-radius: 3px;
   padding-left: 0.5rem;
   width:400px;
+  background-color: #EEEEEE;
 }
 
 .button-wrapper {
@@ -325,7 +339,7 @@ li.favoriteLocation {
 .modalView {
   height: 12rem;
   width: 20rem;
-  background: #fff;
+  background: #EEEEEE;
   padding: 2rem;
   border-radius: 10px;
 }
@@ -343,7 +357,10 @@ li.favoriteLocation {
 .button-area {
   display: flex;
   flex-direction: row;
-  justify-content:right;
+  justify-content:space-around;
+  align-items: center;
+  margin-top: 1.5rem;
+
 }
 
 .description-area {
