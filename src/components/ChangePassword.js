@@ -71,46 +71,46 @@ export default function ChangePassword(){
     }
   }
   return (
-    <div className="myInfo-2-wrapper">
-      <div className="title-wrapper">
+    <div className="mypage-bottom__wrapper">
+      <div className="mypage-bottomleft__title">
         <h3>비밀번호 변경</h3>
       </div>
-      <div className="contents-wrapper">
+      <div className="mypage-bottomright__content">
         { pwPopup ? (
-          <form className="passwordForm">
-            <ul className="passwordForm-container">
-              <li className="passwordForm-wrapper">
-                <div className="description">현재 비밀번호</div>
+          <form className="mypage-bottomright__passwordForm">
+            <ul className="mypage-bottomright__pwFormContainer">
+              <li className="mypage-bottomright__pwFormWrapper">
+                <div className="mypage-bottomright__pwDescription">현재 비밀번호</div>
                 <input
                 type="password"
-                className="passwordInput" 
+                className="mypage-bottomright__pwInput" 
                 value={currentPw} 
                 onChange={inputCurrentPw}></input>
                 {currentPwMsg}
               </li>
-              <li className="passwordForm-wrapper">
-                <div className="description">새 비밀번호</div>
+              <li className="mypage-bottomright__pwFormWrapper">
+                <div className="mypage-bottomright__pwDescription">새 비밀번호</div>
                 <input
                 type="password"
-                className="passwordInput" 
+                className="mypage-bottomright__pwInput" 
                 value={newPw}
                 onChange={inputNewPw}
                 ></input>
                 {pwMsg}
               </li>
-              <li className="passwordForm-wrapper">
-                <div className="description">새 비밀번호 확인</div>
+              <li className="mypage-bottomright__pwFormWrapper">
+                <div className="mypage-bottomright__pwDescription">새 비밀번호 확인</div>
                 <input
                 type="password"
-                className="passwordInput"
+                className="mypage-bottomright__pwInput"
                 value={newPwCheck}
                 onChange={inputNewPwCheck}
                 ></input>
                 {rePwMsg}
               </li>
             </ul>
-            <div className="button-wrapper">
-              <button color="teal" className="myInfo-btn greenbtn" onClick={() => {
+            <div className="mypage-bottomright__buttonwrapper">
+              <button className="mypage-btn greenbtn" onClick={() => {
                 togglePwPopup();
                 submitChangedPw();
                 }}
@@ -118,8 +118,8 @@ export default function ChangePassword(){
             </div>
           </form>
         ) : (
-          <div className="button-wrapper">
-            <button className="myInfo-btnUnderline" onClick={togglePwPopup}>변경</button>
+          <div className="mypage-bottomright__buttonwrapper">
+            <button className="mypage-btnUnderline" onClick={togglePwPopup}>변경</button>
           </div>
         )}
       </div>
