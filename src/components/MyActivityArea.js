@@ -73,29 +73,29 @@ const addLocations = (e) => {
 }
 
   return (
-  <div className="favoriteLocations-container">
-    <div className="favoriteLocations-title-wrapper">
-      <h3 className="favoriteLocations-title">나의 활동지역</h3>
+  <div className="mypage-bottom__wrapper">
+    <div className="mypage-bottomleft__title">
+      <h3>나의 활동지역</h3>
     </div>
-    <div className="favoriteLocations-contents">
-      <ul className="favoriteLocations">
+    <div className="mypage-bottomright__content-activityArea">
+      <ul className="mypage-bottomright__activityAreas">
         {locations.map((tag, index) => {
           return (
-          <li key={index} className="favoriteLocation">
-            <span className="loc-title">{tag[1]}</span>
-            <span className="loc-close-icon" onClick={()=>deleteLocation(index, tag[0])}>✕</span>
+          <li key={index} className="mypage-bottomright__activityArea">
+            <span className="mypage-bottomright__activityArea-name">{tag[1]}</span>
+            <span className="mypage-bottomright__activityArea-closeicon" onClick={()=>deleteLocation(index, tag[0])}>✕</span>
           </li>
           );
         }
       )}
       </ul>
       <input
-        className="favoriteLocation-input"
+        className="mypage-bottomright__activityAreaInput"
         type="text"
         onKeyUp={(e)=>{addLocations(e)}}
         onChange={inputLocationChange}
         value={input}
-        placeholder="'마포구' 와 같이 구를 기준으로 입력해주세요"
+        placeholder="Press Enter to add tag"
         size='10'
       />
     </div>
