@@ -15,8 +15,9 @@ import { useDispatch } from 'react-redux';
 import { setSignState } from '../action/action'
 import { getLoginCookie } from '../lib/cookie'
 import Loading from '../components/Loading'
+import Weather from "./Weather";
 
-const axios = require('axios')
+const axios = require("axios");
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -39,24 +40,24 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Main />}></Route>
-        <Route 
-          path="/signup" 
+        <Route
+          path="/signup"
           element={
             <RequireAuth option={false}>
               <Signup />
             </RequireAuth>
-          } 
+          }
         />
-        <Route 
-          path="/signin" 
+        <Route
+          path="/signin"
           element={
             <RequireAuth option={false}>
               <Signin />
             </RequireAuth>
-          } 
+          }
         />
-        <Route 
-          path="/mypage" 
+        <Route
+          path="/mypage"
           element={
             <RequireAuth option={true}>
               <MyPage />
@@ -66,6 +67,7 @@ function App() {
         <Route path="/postlist" element={<PostListPage />}></Route>
         <Route path="/postdetail/:id" element={<PostDetail />}></Route>
         <Route path="/postwrite" element={<PostWrite />}></Route>
+        <Route path="/weather" element={<Weather />}></Route>
       </Routes>
       <Link to="/">
         <p>메인</p>
