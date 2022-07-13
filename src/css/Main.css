@@ -1,17 +1,47 @@
 .main-container {
-  border: 1px solid red;
   width: 100%;
   height: 100%;
 }
 
+/*날씨*/
+
 .main-weather {
-  border: 1px solid blue;
-  width: 100vw;
+  width: 100%;
   height: 50vh;
+  position: relative;
 }
 
+.main-top__weather img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.main-top__weather h1 {
+  color: rgb(235, 235, 235);
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.main-weather p {
+  color: rgb(235, 235, 235);
+  font-size: 20px;
+  position: absolute;
+  top: 60%;
+  left: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/*아래*/
 .main-container__bottom {
-  border: 1px solid orange;
   width: 100%;
   height: 25%;
   display: flex;
@@ -21,7 +51,6 @@
 }
 
 .main-bottom__left {
-  border: 1px solid black;
   margin: 50px;
   width: 650px;
   height: 300px;
@@ -32,7 +61,7 @@
   color: white;
   font-size: 30px;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
@@ -49,7 +78,6 @@
 }
 
 .main-bottom__right {
-  border: 1px solid black;
   margin: 50px;
   width: 650px;
   height: 300px;
@@ -60,7 +88,7 @@
   color: white;
   font-size: 30px;
   position: absolute;
-  top: 40%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
