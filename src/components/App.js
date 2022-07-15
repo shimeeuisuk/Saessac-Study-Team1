@@ -3,55 +3,54 @@ import { Routes, Route, Link } from "react-router-dom";
 import Signup from "./Signup";
 import Signin from "./Signin";
 import Main from "./Main";
-import PostList from "./PostList";
-import PostDetail from "./PostDetail";
+import PostDetail from "../page/Post/PostDetailPage";
 import MyPage from "./MyPage";
 import PostWrite from "./PostWrite";
 import { PostListPage } from "page/Post/PostListPage";
 import Navbar from "./Navbar";
-import RequireAuth from "./RequireAuth"
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { setSignState } from '../action/action'
-import { getLoginCookie } from '../lib/cookie'
+import RequireAuth from "./RequireAuth";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setSignState } from "../action/action";
+import { getLoginCookie } from "../lib/cookie";
 
-const axios = require('axios')
+const axios = require("axios");
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    (
-      async () => {
-        const res = await axios.get('http://34.168.215.145/user/checklogin', {headers: {authorization: getLoginCookie()}})
-        dispatch(setSignState(res.data.msg))
-      }
-    )()
-  })
+    (async () => {
+      const res = await axios.get("http://34.168.215.145/user/checklogin", {
+        headers: { authorization: getLoginCookie() },
+      });
+      dispatch(setSignState(res.data.msg));
+    })();
+  });
 
   return (
     <div className="App">
       <Navbar />
       <Routes>
         <Route path="/" element={<Main />}></Route>
-        <Route 
-          path="/signup" 
+        <Route
+          path="/signup"
           element={
             <RequireAuth option={false}>
               <Signup />
             </RequireAuth>
-          } 
+          }
         />
-        <Route 
-          path="/signin" 
+        <Route
+          path="/signin"
           element={
             <RequireAuth option={false}>
               <Signin />
             </RequireAuth>
-          } 
+          }
         />
-        <Route 
-          path="/mypage" 
+        <Route
+          path="/mypage"
           element={
             <RequireAuth option={true}>
               <MyPage />
