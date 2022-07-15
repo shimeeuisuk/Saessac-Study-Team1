@@ -36,26 +36,26 @@ export default function MyInfo({userID, nickname, introduce, setNickname, setInt
   }
 
   return (
-  <div className="contents-area">
+  <div className="mypage-container__topright">
     {editPopup ? (
-      <div className="contents-area-2">
-        <form className="myInfo-1-inputForm">
+      <div className="mypage-wrapper__topright">
+        <form className="mypage-inputForm__topright">
         <input 
         type="text"
         placeholder="바꿀 닉네임을 작성해주세요"
-        className="myInfo-inputNickname"
+        className="mypage-inputForm__nickname"
         value={nickname}
         onChange={handleNicknameChange}></input>
         <input
         type="textarea"
         placeholder="자기 소개를 작성해주세요"
-        className="myInfo-inputIntroduce"
+        className="mypage-inputForm__introduce"
         value={introduce}
         onChange={handleIntroChange}
         maxLength="70"
         ></input>
-        <div className="button-wrapper">
-          <button className="myInfo-btn greenbtn" onClick={() => {
+        <div className="mypage-btnwrapper__topright">
+          <button className="mypage-btn greenbtn" onClick={() => {
             toggleEiditPopup();
             submitNickname();
             }} >저장</button>
@@ -63,13 +63,13 @@ export default function MyInfo({userID, nickname, introduce, setNickname, setInt
         </form>
       </div>
     ) : (
-      <div className="contents-area-1">
-        <div className="nameAndId-wrapper">
+      <div className="mypage-wrapper__topright">
+        <div className="mypage-topright__nickname">
           <span>{nickname} </span>
           <span>{userID}</span>
         </div>
-        <p className="introduce">{introduce}</p>
-        <button className="myInfo-btnUnderline" onClick={toggleEiditPopup}>수정</button>
+        <p className="mypage-topright__introduce">{introduce}</p>
+        <button className="mypage-btnUnderline" onClick={toggleEiditPopup}>수정</button>
       </div>
     )}
   </div>

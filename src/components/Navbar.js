@@ -14,6 +14,8 @@ export const NavbarContainer = styled.div`
   background: #fff;
   display: grid;
   grid-template-columns: 11% 78% 11%;
+  box-shadow: 1px 1px 4px 4px rgba(0, 0, 0, 0.2);
+
   > a {
     display: flex;
     align-items: center;
@@ -47,6 +49,7 @@ export const NavbarInputBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   > div {
     position: relative;
     height: 50px;
@@ -55,6 +58,7 @@ export const NavbarInputBox = styled.div`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 25px;
   }
+
   > div > input {
     font-size: 22px;
     width: 80%;
@@ -65,9 +69,11 @@ export const NavbarInputBox = styled.div`
     transform: translate(-50%, -50%);
     border: none;
   }
+
   > div > input:focus{
     outline: none;
   }
+
   > div > svg{
     position: absolute;
     height: 35px;

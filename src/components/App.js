@@ -1,7 +1,7 @@
 import "../css/App.css";
 import { Routes, Route, Link } from "react-router-dom";
-import Signup from "./Signup";
-import Signin from "./Signin";
+import Signup from "../page/Sign/Signup";
+import Signin from "../page/Sign/Signin";
 import Main from "./Main";
 import PostDetail from "../page/Post/PostDetailPage";
 import MyPage from "./MyPage";
@@ -13,10 +13,13 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setSignState } from "../action/action";
 import { getLoginCookie } from "../lib/cookie";
+import Loading from "../components/Loading";
+import Weather from "./Weather";
 
 const axios = require("axios");
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,8 +28,11 @@ function App() {
         headers: { authorization: getLoginCookie() },
       });
       dispatch(setSignState(res.data.msg));
+      setLoading(false);
     })();
   });
+
+  if (loading) return <Loading></Loading>;
 
   return (
     <div className="App">
@@ -60,6 +66,7 @@ function App() {
         <Route path="/postlist" element={<PostListPage />}></Route>
         <Route path="/postdetail/:id" element={<PostDetail />}></Route>
         <Route path="/postwrite" element={<PostWrite />}></Route>
+        <Route path="/weather" element={<Weather />}></Route>
       </Routes>
       <Link to="/">
         <p>메인</p>

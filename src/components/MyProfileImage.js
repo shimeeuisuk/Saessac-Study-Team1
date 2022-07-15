@@ -55,20 +55,20 @@ export default function MyProfileImage({user}) {
   }
   
   return (
-      <div className="thumbnail-area">
+      <div className="mypage-container__topleft">
         {/* preview가 빈 문자열이라면 디폴트이미지를, 빈문자열이 아니라면 preview이미지를 */}
         <img src={preview !== undefined ? preview : `http://34.168.215.145/${user.userPicture}`}
-        width="50px" alt="profile" />
+        width="50px" alt="profile-image" />
         <input 
               ref={imgInput} 
-              className="myInfo-btn greenbtn"
+              className="mypage-btn greenbtn"
               type="file" 
               accept="image/*"
               onChange={(e)=>SaveImgFile(e)}
               style={{display:"none"}}
               ></input>
-        <button className="myInfo-btn greenbtn"  onClick={(e)=>onImgInputBtnClick(e)}>이미지 변경</button>        
-        <button className="myInfo-btn" onClick={()=>deleteImgFile()}>이미지 제거</button>
+        <button className="mypage-btn greenbtn"  onClick={(e)=>onImgInputBtnClick(e)}>이미지 변경</button>        
+        <button className="mypage-btn" onClick={()=>deleteImgFile()}>이미지 제거</button>
       </div>
     );
   

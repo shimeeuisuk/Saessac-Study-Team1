@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react"
 import axios from 'axios';
-import '../css/MyPage.css';
-import {getLoginCookie } from '../lib/cookie';
+import '../../css/MyPage.css';
+import {getLoginCookie } from '../../lib/cookie';
 
-import MyProfileImage from "./MyProfileImage";
-import MyActivityArea from "./MyActivityArea";
-import MyInfo from "./MyInfo";
-import DeleteAccount from "./DeleteAccount";
-import ChangePassword from "./ChangePassword";
+import MyProfileImage from "../../components/MyProfileImage";
+import MyActivityArea from "../../components/MyActivityArea";
+import MyInfo from "../../components/MyInfo";
+import DeleteAccount from "../../components/DeleteAccount";
+import ChangePassword from "../../components/ChangePassword";
 
 function MyPage() {
   const [user, setUser] = useState({});
@@ -54,11 +54,11 @@ function MyPage() {
       <section className="mypage-container__bottom">
         <MyActivityArea locations={locations} setLocations={setLocations} locationList={locationList}/>
         {/* 2. 내가 쓴 글 & 댓글 보기 */}
-        <div className="myInfo-2-wrapper">
-            <div className="title-wrapper">
+        <div className="mypage-bottom__wrapper">
+            <div className="mypage-bottomleft__title">
               <h3>내가 쓴 글</h3>
             </div>
-            <div className="contents-wrapper">
+            <div className="mypage-bottomright__content">
             </div>
         </div>   
         <ChangePassword />

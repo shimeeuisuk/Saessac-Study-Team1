@@ -12,35 +12,8 @@
   margin-top: 2rem;
 }
 
-/* section 1 */
-.mypage-container__top {
-  display: flex;
-  flex-direction: row;
-  width: 600px;
-}
-
-/* 프로필 사진 */
-.thumbnail-area {
-  flex-basis: 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content:center;
-  align-items: center;
-  height: 250px;
-}
-
-.thumbnail-area > img {
-  width: 10rem;
-  height: 10rem;
-  border-radius: 100%;
-}
-
-.contents-area {
-  flex-basis: 450px;
-}
-
 /* 버튼 스타일(전역) */
-.myInfo-btn {
+.mypage-btn {
   font-size: 1rem;
   font-weight: bold;
   margin:0.5rem 0 0 0;
@@ -53,7 +26,7 @@
   color:#0EA958;
 }
 
-.myInfo-btn:hover {
+.mypage-btn:hover {
   background: #e6e7e7;
 }
 
@@ -66,7 +39,7 @@
   background: #68c696;
 }
 
-.myInfo-btnUnderline {
+.mypage-btnUnderline {
   font-size: 1rem;
   text-decoration: underline;
   color:#0EA958;
@@ -74,33 +47,64 @@
   border: none;
 }
 
-button.myInfo-btnUnderline {
+button.mypage-btnUnderline {
   cursor: pointer;
   transition:0.1s; 
 }
-button.myInfo-btnUnderline:hover {
+button.mypage-btnUnderline:hover {
   color: #28de80;
 }
 
-/* 닉네임 & 자기소개 (첫화면)*/
-.contents-area-1 {
+.redbtn {
+  background-color: rgb(247, 103, 103);
+  color:white;
+  margin: 0;
+}
+
+/* mypage-화면상단 */
+.mypage-container__top {
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+}
+
+/* 프로필 사진 */
+.mypage-container__topleft {
+  flex-basis: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  height: 250px;
+}
+
+.mypage-container__topleft > img {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 100%;
+}
+
+/* 닉네임, 아이디, 자기소개 */
+.mypage-container__topright {
+  flex-basis: 450px;
+}
+
+.mypage-wrapper__topright {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin: 1rem 0 0 2rem;
-  
-
 }
-.nameAndId-wrapper {
+
+.mypage-topright__nickname {
   margin-top:1rem;
 }
 
-.nameAndId-wrapper span:nth-of-type(1) {
+.mypage-topright__nickname span:nth-of-type(1) {
   font-size: 2.5rem;
   font-weight: bold;
-
 }
-.introduce {
+.mypage-topright__introduce {
   font-size: 1.2rem;
   font-weight: 500;
   color: rgb(126, 123, 123);
@@ -109,15 +113,8 @@ button.myInfo-btnUnderline:hover {
   max-height: 80px;
 }
 
-
-
 /* 닉네임 & 자기소개 (콘텐츠 수정화면) */
-.contents-area-2 {
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 0 0 2rem;
-}
-.myInfo-1-inputForm {
+.mypage-inputForm__topright {
   height: 180px;
   display: flex;
   flex-direction: column;
@@ -125,19 +122,17 @@ button.myInfo-btnUnderline:hover {
   align-items: flex-end;
 }
 
-.myInfo-inputNickname {
+.mypage-inputForm__nickname {
   font-size: 1.5rem;
-  /* font-weight: bold; */
   color:rgb(82, 79, 79);
   width: 400px;
   height: 40px;
   border: solid rgb(197, 193, 193) 1px;
   border-radius: 3px;
   background-color: #EEEEEE;
-
 }
 
-.myInfo-inputIntroduce{
+.mypage-inputForm__introduce{
   font-size: 1rem;
   color:rgb(82, 79, 79);
   width: 400px;
@@ -147,43 +142,57 @@ button.myInfo-btnUnderline:hover {
   background-color: #EEEEEE;
 }
 
-/* 주활동지역 */
-.favoriteLocations-container {
+/* mypage-화면 하단 */
+.mypage-container__bottom {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  justify-content:center;
+  align-items: center;
+}
+
+.mypage-bottom__wrapper {
   display: flex;
   flex-direction: row;
-  /* margin-left: 2rem; */
-  /* align-items: flex-start; */
   width: 630px;
 }
 
-.favoriteLocations-title-wrapper {
+.mypage-bottomleft__title {
   flex-basis: 150px;
   margin: 1rem;
   font-size: 1rem;
   text-align: left;
 }
 
-.favoriteLocations-contents {
+.mypage-bottomright__content {
+  flex-basis: 450px;
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* 주활동지역 */
+.mypage-bottomright__content-activityArea {
   display: flex;
+  flex-basis: 450px;
   flex-direction: row;
   border: solid rgb(197, 193, 193) 1px;
-  border-radius: 6px;
+  border-radius: 10px;
   align-items: center;
   justify-content:flex-start;
   padding-left: 8px;
-  width:450px;
   flex-wrap: wrap;
-
 }
 
-ul.favoriteLocations {
+ul.mypage-bottomright__activityAreas {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 8px;
 }
 
-li.favoriteLocation {
+li.mypage-bottomright__activityArea {
   width: auto;
   display: flex;
   flex-direction: row;
@@ -199,8 +208,11 @@ li.favoriteLocation {
   font-weight: 700;
 }
 
-.favoriteLocation span.loc-close-icon{
-  /* display: block; */
+.mypage-bottomright__activityArea-name{
+  font-size: 1rem;
+}
+
+.mypage-bottomright__activityArea-closeicon{
   margin-left: 8px;
   background-color:#fff;
   color:#0EA958;
@@ -213,86 +225,55 @@ li.favoriteLocation {
   cursor: pointer;
 }
 
-.favoriteLocation-input {
+.mypage-bottomright__activityAreaInput {
   border: none;
-  font-size: 0.8rem;
+  font-size: 1rem;
   height: 35px;
   flex: 1;
   margin: 0.5rem 0.5rem 0.5rem 0;
   background-color: #EEEEEE;
   color:rgb(82, 79, 79);
-
 }
-.favoriteLocation-input:focus {
+
+.mypage-bottomright__areainput:focus {
   outline: transparent;
 }
 
-.favoriteLocation-input:focus-within {
+.mypage-bottomright__areainput:focus-within {
   border: 1px solid (82, 79, 79);
 }
 
-/* section 2 */
-.mypage-container__bottom {
-  display: flex;
-  flex-direction: column;
-  margin-top: 2rem;
-  justify-content:center;
-  align-items: center;
-}
-
-.myInfo-2-wrapper {
-  display: flex;
-  flex-direction: row;
-  width: 630px;
-  
-}
-
-.title-wrapper {
-  flex-basis: 150px;
-  margin: 1rem;
-  font-size: 1rem;
-  text-align: left;
-}
-.contents-wrapper {
-  flex-basis: 450px;
-  display:flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
 /* 비밀번호 변경 */
-
-.passwordForm {
+.mypage-bottomright__passwordForm {
   display: flex;
   flex-direction: column;
 }
 
-.passwordForm-container {
+.mypage-bottomright__pwFormContainer {
   display: flex;
   flex-direction: column;
   padding-top: 1rem;
 }
 
-.passwordForm-wrapper{
+.mypage-bottomright__pwFormWrapper{
   display: flex;
   flex-direction:column;
   list-style: none;
 }
 
-.passwordForm-wrapper p {
+.mypage-bottomright__pwFormWrapper p {
   color:gray;
   text-align: left;
   font-size: 0.9rem;
 }
 
-.description {
+.mypage-bottomright__pwDescription {
   font-size: 1rem;
   color:rgb(129, 126, 126);
   text-align: left;
   margin-top: 0.2rem;
 }
-.passwordInput {
+.mypage-bottomright__pwInput {
   font-size: 1.5rem;
   border: rgb(166, 163, 163) solid 1px;
   border-radius: 3px;
@@ -301,28 +282,28 @@ li.favoriteLocation {
   background-color: #EEEEEE;
 }
 
-.button-wrapper {
+.mypage-bottomright__buttonwrapper {
   display: flex;
   flex-direction: row;
   justify-content: right;
 }
 
 /* 회원정보 삭제 */
-.redbtn {
-  background-color: rgb(247, 103, 103);
-  color:white;
-  margin: 0;
+.mypage-bottomright__deleteAccountWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.mypage-bottomright__deleteAccountWrapper > button {
+  margin: 0.7rem 0;
+  flex-basis: 30px;
+}
+.mypage-bottomright__deleteAccountDescription {
+  font-size: 0.9rem;
+  color:rgb(129, 126, 126);
 }
 
-
-.deleteAcount-container {
-  display:flex;
-  flex-direction:column;
-  justify-content: center;
-  align-items: center;
-}
-
-.deleteAcount-background {
+.mypage-bottomright__ModalBackground {
   position: fixed;
   width:100%;
   height: 100%;
@@ -336,7 +317,7 @@ li.favoriteLocation {
   transition: 0.3s;
 }
 
-.modalView {
+.mypage-bottomright__ModalView {
   height: 12rem;
   width: 20rem;
   background: #EEEEEE;
@@ -344,26 +325,20 @@ li.favoriteLocation {
   border-radius: 10px;
 }
 
-.modalView > h3 {
+.mypage-bottomright__ModalView > h3 {
   margin-bottom: 1rem;
   text-align: left;
 }
 
-.deleteAccount-msg {
+.mypage-bottomright__ModalMsg {
   margin-bottom: 1rem;
   text-align: left;
 }
 
-.button-area {
+.mypage-bottomright__ModalButtonArea {
   display: flex;
   flex-direction: row;
   justify-content:space-around;
   align-items: center;
   margin-top: 1.5rem;
-
-}
-
-.description-area {
-  padding-right:7rem;
-
 }
