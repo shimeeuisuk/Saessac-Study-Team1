@@ -12,6 +12,7 @@ export default function PostWrite() {
   return (
     <div>
       <select>
+        <option key="000">지역 선택</option>
         {location.map((el, idx) => {
           return <option key={idx}>{el.locationName}</option>;
         })}
