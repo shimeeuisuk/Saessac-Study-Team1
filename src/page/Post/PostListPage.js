@@ -1,8 +1,12 @@
 import PostList from "components/PostList";
 import { useState } from "react";
 import styled from "styled-components";
+import { Icon } from "@iconify/react";
 
 const Container = styled.div`
+  width: 800px;
+  height: 900px;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,6 +21,8 @@ const TabMenu = styled.ul`
   text-align: center;
   list-style: none;
   width: 400px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 
   .DeActive {
     padding-top: 5px;
@@ -53,7 +59,7 @@ const Writepostbox = styled.div`
   }
 
   .writeicon {
-    margin-top: 20px;
+    margin-top: 22px;
     margin-right: 10px;
   }
 `;
@@ -86,7 +92,9 @@ export function PostListPage() {
       </TabMenu>
       <Writepostbox>
         <span className="writepost">새 글을 작성해 주세요!</span>
-        <span className="writeicon">수정</span>
+        <span className="writeicon">
+          <Icon icon="cil:pencil" />
+        </span>
       </Writepostbox>
       <PostList selectedTab={selectedTab} />
     </Container>
