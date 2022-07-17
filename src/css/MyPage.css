@@ -173,9 +173,15 @@ button.mypage-btnUnderline:hover {
 }
 
 /* 주활동지역 */
+.mypage-bottomright__content {
+  display: flex;
+  flex-direction: column;
+  /* flex-basis: 450px; */
+}
+
 .mypage-bottomright__content-activityArea {
   display: flex;
-  flex-basis: 450px;
+  width: 450px;
   flex-direction: row;
   border: solid rgb(197, 193, 193) 1px;
   border-radius: 10px;
@@ -201,9 +207,9 @@ li.mypage-bottomright__activityArea {
   color: #fff;
   list-style: none;
   background-color: #0EA958;
-  margin: 0 8px 8px 0;
+  margin: 0 5px 5px 0;
   border-radius: 6px;
-  padding: 6px 10px;
+  padding: 6px 6px;
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -233,6 +239,7 @@ li.mypage-bottomright__activityArea {
   margin: 0.5rem 0.5rem 0.5rem 0;
   background-color: #EEEEEE;
   color:rgb(82, 79, 79);
+  outline: none;
 }
 
 .mypage-bottomright__areainput:focus {
@@ -242,6 +249,36 @@ li.mypage-bottomright__activityArea {
 .mypage-bottomright__areainput:focus-within {
   border: 1px solid (82, 79, 79);
 }
+
+/* 주활동지역 - 자동완성 */
+.mypage-bottomright__autoCompleteContainer {
+  display: flex; 
+  flex-direction: row;
+  width: 450px;
+  align-items: center;
+  flex-wrap: wrap; 
+  position:absolute;
+  border-radius: 5px ;
+  top:28rem;
+  box-shadow: 0 4px 6px rgb(32 33 36 / 15%);
+}
+
+.mypage-bottomright__autoComplete {
+  background-color: white;
+  color:rgb(82, 79, 79);
+  font-weight: 600;
+  list-style-type: none;
+  margin: 0.2rem 0.2rem;
+  padding: 0.3rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.mypage-bottomright__autoComplete:hover {
+  background-color:#b9f3bb;
+  transition: 0.5s;
+}
+
 
 /* 비밀번호 변경 */
 .mypage-bottomright__passwordForm {
