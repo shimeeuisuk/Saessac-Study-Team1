@@ -120,20 +120,12 @@ export default function MyActivityArea({locations, setLocations, locationList}){
       />
       </div>
     </div>
-    {autoComplete && (
-      <DropDown autoComplete={autoComplete} ClickedTarget={ClickedTarget}/>
-    )}
-    </div>
-  </div>
-  );
-}
-
-export const DropDown = ({ autoComplete, ClickedTarget }) => {
-  return (
     <ul className="mypage-bottomright__autoCompleteContainer">
         {autoComplete.map(el => (
           <li className="mypage-bottomright__autoComplete" key={el.lid} onClick={ClickedTarget}>{el.locationName}</li>
         ))}
     </ul>
+    </div>
+  </div>
   );
-};
+}
