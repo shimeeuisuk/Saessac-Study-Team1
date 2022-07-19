@@ -14,9 +14,11 @@ export default function PostList(props) {
     }); //데이터를 가지고 옴
   }, []);
 
+  const reverselist = list.reverse();
+
   useEffect(() => {
     setFriendlist(
-      list.filter((el) => {
+      reverselist.filter((el) => {
         return el.type === "friend";
       })
     );
@@ -24,7 +26,7 @@ export default function PostList(props) {
 
   useEffect(() => {
     setLocationlist(
-      list.filter((el) => {
+      reverselist.filter((el) => {
         return el.type === "location";
       })
     );
