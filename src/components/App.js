@@ -4,18 +4,18 @@ import Signup from "../page/Sign/Signup";
 import Signin from "../page/Sign/Signin";
 import Main from "./Main";
 import PostDetail from "../page/Post/PostDetailPage";
-import MyPage from "./MyPage";
-import PostWrite from "./PostWrite";
-import { PostListPage } from "page/Post/PostListPage";
+import MyPage from "../page/MyPage/MyPage";
+import PostWritePage from "../page/Post/PostWritePage";
+import PostListPage from "page/Post/PostListPage";
+import PostEditPage from "page/Post/PostEditPage";
 import Navbar from "./Navbar";
 import RequireAuth from "./RequireAuth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSignState } from "../action/action";
 import { getLoginCookie } from "../lib/cookie";
 import Loading from "../components/Loading";
 import Weather from "./Weather";
-
 const axios = require("axios");
 
 function App() {
@@ -65,7 +65,22 @@ function App() {
         />
         <Route path="/postlist" element={<PostListPage />}></Route>
         <Route path="/postdetail/:id" element={<PostDetail />}></Route>
-        <Route path="/postwrite" element={<PostWrite />}></Route>
+        <Route
+          path="/postwrite"
+          element={
+            <RequireAuth option={true}>
+              <PostWritePage />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/postedit/:id"
+          element={
+            <RequireAuth option={true}>
+              <PostEditPage />
+            </RequireAuth>
+          }
+        ></Route>
         <Route path="/weather" element={<Weather />}></Route>
       </Routes>
       <Link to="/">
