@@ -30,8 +30,10 @@ const Weather = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         const mainweather = [
           {
+            weather: data.weather[0].main,
             icon: data.weather[0].icon.replace("n", "d"),
             temp: data.main.temp,
           },
@@ -72,37 +74,57 @@ const Weather = () => {
       getWeekWeather();
     }
   }, [location.latitude]);
-
+  console.log(mainData);
   return (
     <>
-      <div className="Weather-main">
-        {mainData &&
-          mainData.map((el, idx) => (
-            <div key={idx} className="">
-              <img
-                src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
-                alt="날씨이"
-              />
-              <span>{el.temp}</span>
-            </div>
-          ))}
-      </div>
-      <div className="weather-sub">
-        {datas &&
-          datas.map((el, idx) => (
-            <span key={idx} className="">
-              <span>
+      <div>
+        {loading ? null : mainData.weather === "Clear" ? (
+          <div className="Weather_backimg">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxmLy6c2ZmZg43nDGjj2oQNIseFaj1_TuiTyIpBgNe_BzZ3hW5UOEmRxU0WWcXKmyuwXU&usqp=CAU" />
+          </div>
+        ) : mainData.weather === "Mist" ? (
+          <div className="Weather_backimg">
+            <img src="https://www.10wallpaper.com/wallpaper/1366x768/1111/misty-Beautiful_natural_scenery_Desktop_Wallpapers_1366x768.jpg" />
+          </div>
+        ) : mainData.weather === "Rain" ? (
+          <div className="Weather_backimg">
+            <img src="https://c.wallhere.com/photos/83/ac/photography_water_monochrome_rain_glass_lights-77676.jpg!d" />
+          </div>
+        ) : (
+          <div className="Weather_backimg">
+            <img src="https://blog.kakaocdn.net/dn/bb8JPu/btqAy2n9ICw/ImlkUSOmY1yLdjrGuIKhgK/img.jpg" />
+          </div>
+        )}
+
+        <div className="Weather-main">
+          {mainData &&
+            mainData.map((el, idx) => (
+              <div key={idx} className="Weather-main__">
                 <img
                   src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
-                  alt="날씨"
+                  alt="날씨이"
                 />
-              </span>
-              <span className="weather_right">
-                <span>{el.time.slice(11, 13)}시</span>
                 <span>{el.temp}</span>
+              </div>
+            ))}
+        </div>
+        <div className="Weather-sub">
+          {datas &&
+            datas.map((el, idx) => (
+              <span key={idx} className="">
+                <span className="Weather-sub__icon">
+                  <img
+                    src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
+                    alt="날씨"
+                  />
+                </span>
+                <span className="Weather_text">
+                  <span>{el.time.slice(11, 13)}시</span>
+                  <span>{el.temp}</span>
+                </span>
               </span>
-            </span>
-          ))}
+            ))}
+        </div>
       </div>
     </>
   );
