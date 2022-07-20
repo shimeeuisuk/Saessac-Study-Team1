@@ -238,6 +238,7 @@ button.mypage-btnUnderline:hover {
   justify-content:flex-start;
   padding-left: 8px;
   flex-wrap: wrap;
+  margin-top: 2px;
 }
 
 ul.mypage-bottomright__activityAreas {
@@ -256,7 +257,7 @@ li.mypage-bottomright__activityArea {
   color: #fff;
   list-style: none;
   background-color: #0EA958;
-  margin: 0 8px 6px 0;
+  margin: 0 6px 6px 0;
   border-radius: 6px;
   padding: 6px 6px;
   font-size: 0.8rem;
@@ -268,7 +269,7 @@ li.mypage-bottomright__activityArea {
 }
 
 .mypage-bottomright__activityArea-closeicon{
-  margin-left: 8px;
+  margin-left: 6px;
   background-color:#fff;
   color:#0EA958;
   border-radius: 100%;
@@ -279,13 +280,16 @@ li.mypage-bottomright__activityArea {
   text-align: center;
   cursor: pointer;
 }
-
+.mypage-bottomright__activityAreaInputContainer {
+  display: flex;
+  width: 450px;
+}
 .mypage-bottomright__activityAreaInput {
+  flex:1;
   border: none;
-  font-size: 1rem;
-  height: 35px;
-  flex: 1;
-  margin: 0.5rem 0.5rem 0.5rem 0;
+  font-size: 0.95rem;
+  height: 30px;
+  margin: 0rem 0.5rem 0.5rem 0;
   background-color: #EEEEEE;
   color:rgb(82, 79, 79);
   outline: none;
