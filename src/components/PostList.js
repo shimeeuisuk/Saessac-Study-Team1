@@ -10,6 +10,7 @@ export default function PostList(props) {
 
   useEffect(() => {
     axios.get("http://34.168.215.145/topic/list").then((res) => {
+      console.log(res.data);
       setList([...res.data]);
     }); //데이터를 가지고 옴
   }, []);
