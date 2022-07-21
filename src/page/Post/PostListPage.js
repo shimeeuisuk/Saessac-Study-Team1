@@ -2,6 +2,7 @@ import PostList from "components/PostList";
 import { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 800px;
@@ -45,26 +46,26 @@ const TabMenu = styled.ul`
 `;
 
 const Writepostbox = styled.div`
-  margin-bottom: 50px;
+  padding: 10px 0px 10px 0px;
   width: 600px;
   height: 60px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
   background-color: #13c768;
   color: white;
+  align-items: center;
 
   .writepost {
-    margin-top: 20px;
     margin-left: 10px;
   }
 
   .writeicon {
-    margin-top: 22px;
     margin-right: 10px;
   }
 `;
 
-export function PostListPage() {
+export default function PostListPage() {
   const [selectedTab, setSelectedTab] = useState(0);
 
   function clickhandler(num) {
@@ -92,9 +93,11 @@ export function PostListPage() {
       </TabMenu>
       <Writepostbox>
         <span className="writepost">새 글을 작성해 주세요!</span>
-        <span className="writeicon">
-          <Icon icon="cil:pencil" />
-        </span>
+        <Link to="/postwrite">
+          <span className="writeicon">
+            <Icon icon="cil:pencil" />
+          </span>
+        </Link>
       </Writepostbox>
       <PostList selectedTab={selectedTab} />
     </Container>
