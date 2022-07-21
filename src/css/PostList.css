@@ -1,6 +1,8 @@
+
 .communitypage-container {
-    border: 1px solid #13c768;;
+    border: 1px solid #0fa958;
     width: 600px;
+    height: 170px;
   }
   
   .communitypage-container__top {
@@ -38,6 +40,11 @@
     border-radius: 50%;
   }
   .communitypage-middle__content {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 40px;
     text-align: left;
     margin-top: 20px;
     margin-left: 10px;
