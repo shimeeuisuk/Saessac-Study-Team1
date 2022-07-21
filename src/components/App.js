@@ -3,11 +3,11 @@ import { Routes, Route, Link } from "react-router-dom";
 import Signup from "../page/Sign/Signup";
 import Signin from "../page/Sign/Signin";
 import Main from "./Main";
-import PostList from "./PostList";
-import PostDetail from "./PostDetail";
+import PostDetail from "../page/Post/PostDetailPage";
 import MyPage from "../page/MyPage/MyPage";
-import PostWrite from "./PostWrite";
-import { PostListPage } from "page/Post/PostListPage";
+import PostWritePage from "../page/Post/PostWritePage";
+import PostListPage from "page/Post/PostListPage";
+import PostEditPage from "page/Post/PostEditPage";
 import Navbar from "./Navbar";
 import RequireAuth from "./RequireAuth";
 import { useEffect, useState } from "react";
@@ -67,7 +67,22 @@ function App() {
         />
         <Route path="/postlist" element={<PostListPage />}></Route>
         <Route path="/postdetail/:id" element={<PostDetail />}></Route>
-        <Route path="/postwrite" element={<PostWrite />}></Route>
+        <Route
+          path="/postwrite"
+          element={
+            <RequireAuth option={true}>
+              <PostWritePage />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/postedit/:id"
+          element={
+            <RequireAuth option={true}>
+              <PostEditPage />
+            </RequireAuth>
+          }
+        ></Route>
         <Route path="/weather" element={<Weather />}></Route>
         <Route path="/chat" element={<Chat />}></Route>
       </Routes>

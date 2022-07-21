@@ -1,5 +1,6 @@
+.App{ text-align: center}
 
- /* .App-header {
+.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -8,8 +9,8 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-} */
-/*
+} 
+
 .App-link {
   color: #61dafb;
 }
@@ -21,65 +22,7 @@
   to {
     transform: rotate(360deg);
   }
-} */
-
-.communitypage-container {
-  border: 1px solid #13c768;;
-  width: 600px;
 }
 
-.communitypage-container__top {
-  width: 600px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  margin-right: 0px;
-}
 
-.communitypage-top__left > h2 {
-  margin-top:10px;
-  margin-left: 10px;
-  margin-bottom: 0px;
-}
-
-.communitypage-top__left > div {
-  text-align: left;
-  margin-top:0px;
-  margin-left: 10px;
-  margin-bottom: 0px;
-}
-
-.communitypage-top__right {
-margin-right: 10px;
-margin-top: 5px;;
-}
-
-.communitypage-bottom__thumb {
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-}
-.communitypage-middle__content {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.communitypage-container__bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 20px;
-  padding-top:0px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: small;
-}
-
-.communitypage-bottom__reply{
-  margin-top: 8px;
-  margin-right: 10px;
-}
 

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "../css/PostList.css";
+
 export default function PostList(props) {
   const [list, setList] = useState([]);
   const [friendlist, setFriendlist] = useState([]);
@@ -8,13 +10,16 @@ export default function PostList(props) {
 
   useEffect(() => {
     axios.get("http://34.168.215.145/topic/list").then((res) => {
+      console.log(res.data);
       setList([...res.data]);
     }); //데이터를 가지고 옴
   }, []);
 
+  const reverselist = list.reverse();
+
   useEffect(() => {
     setFriendlist(
-      list.filter((el) => {
+      reverselist.filter((el) => {
         return el.type === "friend";
       })
     );
@@ -22,7 +27,7 @@ export default function PostList(props) {
 
   useEffect(() => {
     setLocationlist(
-      list.filter((el) => {
+      reverselist.filter((el) => {
         return el.type === "location";
       })
     );
@@ -32,14 +37,14 @@ export default function PostList(props) {
     <>
       {props.selectedTab === 0 ? (
         <div>
-          {friendlist.map((el) => {
-            return <PostBox data={el} />;
+          {friendlist.map((el, i) => {
+            return <PostBox data={el} key={i} />;
           })}
         </div>
       ) : (
         <div>
-          {locationlist.map((el) => {
-            return <PostBox data={el} />;
+          {locationlist.map((el, i) => {
+            return <PostBox data={el} key={i} />;
           })}
         </div>
       )}
@@ -64,7 +69,14 @@ function PostBox(props) {
             <div>{new Date(props.data.created_at).toLocaleString()}</div>
           </div>
           <div className="communitypage-top__right">
-            <span> 모집중 </span>
+            <span>
+              {" "}
+              {props.data.type === "location"
+                ? null
+                : props.data.recruit === "recruiting"
+                ? "모집중"
+                : "모집완료"}
+            </span>
           </div>
         </div>
         <div className="communitypage-container__middle">
@@ -75,7 +87,7 @@ function PostBox(props) {
           </div>
           <div className="communitypage-container__bottom">
             <div className="communitypage-bottom__information">
-              <span>
+              <span className="communitypage-bottom__img">
                 <img
                   className="communitypage-bottom__thumb"
                   src={`http://34.168.215.145/${props.data.userPicture}`}
