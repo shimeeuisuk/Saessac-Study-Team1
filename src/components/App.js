@@ -16,6 +16,8 @@ import { setSignState } from "../action/action";
 import { getLoginCookie } from "../lib/cookie";
 import Loading from "../components/Loading";
 import Weather from "./Weather";
+import Chat from "./Chat";
+
 const axios = require("axios");
 
 function App() {
@@ -82,6 +84,7 @@ function App() {
           }
         ></Route>
         <Route path="/weather" element={<Weather />}></Route>
+        <Route path="/chat" element={<Chat />}></Route>
       </Routes>
       <Link to="/">
         <p>메인</p>
@@ -100,6 +103,9 @@ function App() {
       </Link>
       <Link to="/postwrite">
         <p>글 작성</p>
+      </Link>
+      <Link to="/chat">
+        <p>댓글</p>
       </Link>
     </div>
   );
