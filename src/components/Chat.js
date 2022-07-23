@@ -2,12 +2,17 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { getLoginCookie } from "../lib/cookie";
+import { BsTrash } from "react-icons/bs";
 
 export const ChatContainer = styled.div`
   background: tomato;
 `;
 
 export const ChatList = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   background: skyblue;
 `;
 
@@ -15,14 +20,17 @@ export const ChatInput = styled.input`
   background: tomato;
 `;
 
+const BsTrashes = styled.div`
+  cursor: pointer;
+`;
+
 const Chat = ({ tid }) => {
   const [comment, setComment] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(tid);
   useEffect(() => {
     getComments();
   }, []);
-
+  console.log(comment);
   const getComments = () => {
     axios
       .get(`http://34.168.215.145/topiccomments/${tid}`, {
@@ -32,12 +40,29 @@ const Chat = ({ tid }) => {
         setComment(res.data);
         setLoading(false);
         console.log(res.data);
+      })
+      .catch((err) => console.log("err"));
+  };
+
+  const deleteHandler = (tcid) => {
+    console.log(tcid);
+    // setComment(comment.filter((e) => e.tcid !== tcid));
+    axios
+      .delete(`http://34.168.215.145/topiccomments/${tcid}`, {
+        headers: { Authorization: getLoginCookie() },
+      })
+      .then((res) => {
+        getComments();
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
   const handleInput = (e) => {
     const data = {
-      topic_tid: e.tid,
+      topic_tid: tid,
       topiccomment: e.target.value,
     };
     if (e.key === "Enter") {
@@ -47,8 +72,9 @@ const Chat = ({ tid }) => {
           headers: { Authorization: getLoginCookie() },
         })
         .then((res) => {
+          e.target.value = "";
           getComments();
-          res.target.value = "";
+          setLoading(false);
         });
     }
   };
@@ -59,7 +85,12 @@ const Chat = ({ tid }) => {
       <ChatList>
         {comment.map((e, i) => (
           <div key={i}>
-            {e.nickname}: {e.topicComent}
+            <div>
+              {e.nickname} : {e.topicComent}
+            </div>
+            <BsTrashes onClick={() => deleteHandler(e.tcid)}>
+              <BsTrash />
+            </BsTrashes>
           </div>
         ))}
       </ChatList>
@@ -68,10 +99,3 @@ const Chat = ({ tid }) => {
 };
 
 export default Chat;
-
-// console.log(props.detail.tid);
-{
-  /* <section>
-<Chat tid={props.detail.tid}></Chat>
-</section> */
-}
