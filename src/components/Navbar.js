@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
 export const NavbarContainer = styled.div`
+  font-family: 'Orbitron', sans-serif;
   position: fixed;
   top: 0;
   left: 0;
