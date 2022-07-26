@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import ChatPagination from "./ChatPagination";
 import { getLoginCookie } from "../lib/cookie";
 import { BsTrash } from "react-icons/bs";
 
@@ -24,13 +25,26 @@ const BsTrashes = styled.div`
   cursor: pointer;
 `;
 
+const ChatForm = styled.div`
+  display: flex;
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+`;
+
 const Chat = ({ tid }) => {
   const [comment, setComment] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
+
   useEffect(() => {
     getComments();
-  }, []);
-  console.log(comment);
+  }, [page]);
+
   const getComments = () => {
     axios
       .get(`http://34.168.215.145/topiccomments/${tid}`, {
@@ -45,19 +59,15 @@ const Chat = ({ tid }) => {
   };
 
   const deleteHandler = (tcid) => {
-    console.log(tcid);
-    // setComment(comment.filter((e) => e.tcid !== tcid));
     axios
       .delete(`http://34.168.215.145/topiccomments/${tcid}`, {
         headers: { Authorization: getLoginCookie() },
       })
       .then((res) => {
         getComments();
-        console.log(res);
+        setLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const handleInput = (e) => {
@@ -66,7 +76,6 @@ const Chat = ({ tid }) => {
       topiccomment: e.target.value,
     };
     if (e.key === "Enter") {
-      console.log("dd");
       axios
         .post(`http://34.168.215.145/topiccomments/insert`, data, {
           headers: { Authorization: getLoginCookie() },
@@ -79,22 +88,35 @@ const Chat = ({ tid }) => {
     }
   };
   if (loading) return null;
+  console.log(comment[0].userPicture);
   return (
-    <ChatContainer>
-      <ChatInput onChange={handleInput} onKeyUp={handleInput} />
-      <ChatList>
-        {comment.map((e, i) => (
-          <div key={i}>
-            <div>
-              {e.nickname} : {e.topicComent}
-            </div>
-            <BsTrashes onClick={() => deleteHandler(e.tcid)}>
-              <BsTrash />
-            </BsTrashes>
-          </div>
-        ))}
-      </ChatList>
-    </ChatContainer>
+    <>
+      <div>댓글 {comment.length}</div>
+      <ChatContainer>
+        <ChatList>
+          {comment.slice(offset, offset + limit).map((e, i) => (
+            <ChatForm key={i}>
+              <div>
+                <img src={`http://34.168.215.145/${e.userPicture}`} />
+                {e.nickname} : {e.topicComent}
+              </div>
+              <BsTrashes onClick={() => deleteHandler(e.tcid)}>
+                <BsTrash />
+              </BsTrashes>
+            </ChatForm>
+          ))}
+        </ChatList>
+        <ChatInput onChange={handleInput} onKeyPress={handleInput} />
+        <div>
+          <ChatPagination
+            total={comment.length}
+            limit={limit}
+            page={page}
+            setPage={setPage}
+          />
+        </div>
+      </ChatContainer>
+    </>
   );
 };
 
