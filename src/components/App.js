@@ -1,7 +1,7 @@
 import "../css/App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Signup from "../page/Sign/Signup";
-import Signin from "../page/Sign/Signin";
+import Signin from "./Signin";
 import Main from "./Main";
 import PostDetail from "../page/Post/PostDetailPage";
 import MyPage from "../page/MyPage/MyPage";
@@ -23,6 +23,7 @@ const axios = require("axios");
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const [viewModal, setModal] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -38,7 +39,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar viewModal={viewModal} setModal={setModal}/>
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route
@@ -50,17 +51,9 @@ function App() {
           }
         />
         <Route
-          path="/signin"
-          element={
-            <RequireAuth option={false}>
-              <Signin />
-            </RequireAuth>
-          }
-        />
-        <Route
           path="/mypage"
           element={
-            <RequireAuth option={true}>
+            <RequireAuth option={true} setModal={setModal}>
               <MyPage />
             </RequireAuth>
           }
@@ -70,7 +63,7 @@ function App() {
         <Route
           path="/postwrite"
           element={
-            <RequireAuth option={true}>
+            <RequireAuth option={true} setModal={setModal}>
               <PostWritePage />
             </RequireAuth>
           }
@@ -78,7 +71,7 @@ function App() {
         <Route
           path="/postedit/:id"
           element={
-            <RequireAuth option={true}>
+            <RequireAuth option={true} setModal={setModal}>
               <PostEditPage />
             </RequireAuth>
           }
@@ -86,14 +79,16 @@ function App() {
         <Route path="/weather" element={<Weather />}></Route>
         <Route path="/chat" element={<Chat />}></Route>
       </Routes>
+      {
+        viewModal ?
+        <Signin viewModal={viewModal} setModal={setModal}></Signin> :
+        null
+      }
       <Link to="/">
         <p>메인</p>
       </Link>
       <Link to="/signup">
         <p>회원가입</p>
-      </Link>
-      <Link to="/signin">
-        <p>로그인</p>
       </Link>
       <Link to="/mypage">
         <p>마이페이지</p>
