@@ -88,7 +88,7 @@ const Chat = ({ tid }) => {
     }
   };
   if (loading) return null;
-  console.log(comment[0].userPicture);
+  // console.log(comment[0].userPicture);
   return (
     <>
       <div>댓글 {comment.length}</div>

@@ -28,6 +28,12 @@ const Button = styled.button`
     cursor: revert;
     transform: revert;
   }
+  &[aria-current] {
+    background: deeppink;
+    font-weight: bold;
+    cursor: revert;
+    transform: revert;
+  }
 `;
 
 const ChatPagination = ({ total, limit, page, setPage }) => {
@@ -42,7 +48,11 @@ const ChatPagination = ({ total, limit, page, setPage }) => {
         {Array(numPages)
           .fill()
           .map((e, i) => (
-            <Button key={i + 1} onClick={() => setPage(i + 1)}>
+            <Button
+              key={i + 1}
+              onClick={() => setPage(i + 1)}
+              aria-current={page === i + 1 ? "page" : null}
+            >
               {i + 1}
             </Button>
           ))}

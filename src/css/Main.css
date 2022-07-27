@@ -1,16 +1,28 @@
 .main-container {
-  width: 100%;
+  width: 80%;
   height: 100%;
+  background: #ffffff;
+  margin: 0 auto;
 }
 
 /*날씨*/
 
 .main-weather {
   width: 100%;
-  height: 50vh;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
   position: relative;
 }
-
+.main-top__weather {
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .main-top__weather img {
   position: absolute;
   width: 100%;
@@ -18,26 +30,70 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
 }
 
 .main-top__weather h1 {
   color: rgb(235, 235, 235);
-  font-size: 30px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  text-align: right;
+  z-index: 1;
+  padding-right: 20px;
 }
-.main-weather p {
+.main-top__weather span {
   color: rgb(235, 235, 235);
   font-size: 20px;
-  position: absolute;
-  top: 60%;
-  left: 60%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+
+  z-index: 1;
+}
+.main-top__weather div p {
+  padding-right: 5px;
+}
+.main-top__weather div svg {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding-left: 10px;
+}
+/*중간*/
+.main-middle {
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+.main-container__middle {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.main-container__middle div {
+  display: flex;
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+.main-middle__running {
+  padding-bottom: 10px;
+}
+.main-container__middle::before,
+.main-container__middle::after {
+  content: "";
+  flex-grow: 1;
+  background: rgba(0, 0, 0, 0.35);
+  height: 1px;
+  font-size: 0px;
+  line-height: 0px;
+  margin: 0px 40px;
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
+.main-middle__running {
+  bottom: 20px;
 }
 
 /*아래*/
@@ -47,59 +103,94 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ececec;
 }
 
 .main-bottom__left {
-  margin: 50px;
-  width: 650px;
-  height: 300px;
+  margin: 10px 15px;
+  width: 80%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
+  border-radius: 20px;
+  background: #c3ff75;
+  box-shadow: 15px 15px 1px 1px black;
+}
+.main-bottom__left svg {
+  position: absolute;
+  left: 75%;
+  top: 20%;
 }
 
+.main-find {
+  left: 29%;
+  top: 27%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 2rem;
+  z-index: 2;
+}
+.main-bottom__left__img {
+  color: white;
+  border: 1px solid black;
+  width: 80%;
+  height: 22%;
+  font-size: 2.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffd76f;
+  box-shadow: 0px 5px 1px 1px black;
+}
+.main-bottom__left__img a {
+  text-decoration: none;
+}
 .main-bottom__left__img p {
-  color: white;
-  font-size: 30px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 2;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 800;
+  color: #a674fe;
 }
-
-.main-bottom__left__img img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
 .main-bottom__right {
-  margin: 50px;
-  width: 650px;
-  height: 300px;
+  background: #a674fe;
+  border-radius: 20px;
+  margin: 10px 15px;
+  width: 80%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
+  box-shadow: 15px 15px 1px 1px black;
 }
-
+.main-bottom__right__img {
+  border: 1px solid black;
+  width: 80%;
+  height: 22%;
+  font-size: 2.3em;
+  background: #17563f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 5px 1px 1px black;
+}
+.main-bottom__right__img a {
+  text-decoration: none;
+}
 .main-bottom__right__img p {
-  color: white;
-  font-size: 30px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  font-family: "Orbitron", sans-serif;
+  font-weight: 800;
+  color: #c3ff75;
   z-index: 2;
 }
-
-.main-bottom__right__img img {
+.main-finds {
+  left: 35%;
+  top: 30%;
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
+  font-weight: 700;
+  font-size: 2em;
+  z-index: 2;
 }
