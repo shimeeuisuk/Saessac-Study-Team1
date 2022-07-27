@@ -8,148 +8,150 @@ export const SignContainer = styled.div`
   align-items: center;
 `
 
+export const SigninContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, .6);
+  z-index: 2;
+`
+
 export const SignBox = styled.div`
-  width: 440px;
-  height: 580px;
+  width: 450px;
+  height: 450px;
   text-align: center;
-  box-shadow: 8px 8px 4px 1px rgba(0, 0, 0, 0.25), 1px 1px 4px 1px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
+  border-radius: 5px;
   background: #fff;
-
-  > div > svg {
-    padding: 60px 0 30px 0;
-    width: 180px;
-  }
-
-  > div:nth-child(2) {
-    margin: 0 70px;
-  }
-
-  > div:nth-child(2) > div {
-    width: 300px;
-    background: #eee;
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  }
-
-  > div:nth-child(2) > div > p {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.6);
-    text-align: start;
-    padding: 10px 10px 5px 10px;
-    width: 300px;
-  }
-
-  > button {
-    font-size: 14px;
-    margin: 0 70px 30px 70px;
-    box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.25);
-    width: 300px;
-    height: 50px;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    background: #eee;
-    cursor: pointer;
-    font-weight: bold;
-    transition: .2s;
-  }
-
-  > button:hover {
-    background: rgb(34, 163, 85);
-    color: #fff;
-    transition: .2s;
-  }
-
-  > span {
-    font-size: 14px;
-  }
 `
 
 export const SigninBox = styled(SignBox)`
-  > div:nth-child(2) > div > input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > div.logoBox {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 25px;
+    margin: 45px 0 12px 0;
+  }
+
+  > div.signinTitle {
+    font-weight: 400;
     font-size: 20px;
-    outline: none;
-    border: none;
-    background: #eee;
-    margin: 0 10px 10px 10px;
-    border-radius: 10px;
-    width: 280px;
-    height: 25px;
+    margin-bottom: 35px;
   }
 
-  > div:nth-child(2) > div {
-    margin-bottom: 20px;
+  > input {
+    width: 420px;
+    height: 42px;
+    background: #FFF;
+    border: 1px solid #E5E5E5;
+    margin-bottom: 14px;
+    padding-left: 10px;
   }
 
-  > div:nth-child(3) {
+  > div.loginBox {
+    width: 420px;
+    height: 42.75px;
+    background: #000000;
+    color: #FFF;
+    font-weight: 400;
     font-size: 14px;
-    color: rgba(0, 0, 0, .85);
-    width: 300px;
-    height: 25px;
-    margin: 25px 70px 30px 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    cursor: pointer;
+  }
+
+  > div.loginMsg {
+    margin: 20px 0;
+    font-size: 14px;
+    height: 14px;
+  }
+
+  > div.registerInfo {
+    font-weight: 500;
+    font-size: 13px;
+    color: #B0ABAB;
+  }
+
+  > div.registerInfo > div {
+    display: inline-block;
+  }
+
+  > div.registerInfo > div > a {
+    text-decoration: none;
+    color: #000;
   }
 `
 
 export const SignupBox = styled(SignBox)`
-  > div:nth-child(2) > div > input {
-    font-size: 20px;
-    outline: none;
-    border: none;
-    background: #eee;
-    margin: 0 10px 10px 10px;
-    border-radius: 10px;
-    width: 280px;
-    height: 25px;
+  width: 500px;
+  height: 515px;
+
+  > div.signupTitle {
+    font-weight: 600;
+    font-size: 25px;
+    margin-top: 42px;
   }
 
-  > div:nth-child(2) > div {
-    margin-bottom: 10px;
-  }
-
-  > div:nth-child(2) > div:first-child {
-    display: grid;
-    grid-template-columns: 250px 50px;
-  }
-
-  > div:nth-child(2) > div:first-child > p {
-    grid-column: 1;
-    width: 100%;
-  }
-
-  > div:nth-child(2) > div:first-child > input {
-    grid-column: 1;
-    font-size: 18px;
-    outline: none;
-    border: none;
-    background: #eee;
-    margin: 0 10px 10px 10px;
-    border-radius: 10px;
-    width: calc(100% - 20px);
-    height: 20px;
-  }
-
-  > div:nth-child(2) > div:first-child > button {
-    grid-column: 2;
-    grid-row: 1 / 3;
-    border: none;
-    border-radius: 0px 10px 10px 0px;
-    transition: .2s;
-    cursor: pointer;
-    color: rgba(0, 0, 0, 0.6);
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  > div:nth-child(2) > div:first-child > button:hover {
-    background: rgb(34, 163, 85);
-    color: #fff;
-    border-left: none;
-    transition: .2s;
-  }
-
-  > div:nth-child(2) > p {
-    height: 16px;
+  > div.signupSubTitle {
+    font-weight: 500;
     font-size: 14px;
-    margin-bottom: 10px;
+    color: #B0ABAB;
+    margin-top: 15px;
+  }
+
+  > div.signupInputContainer {
+    margin-top: 45px;
+  }
+
+  > div.signupInputContainer > div > input {
+    width: 440px;
+    height: 42px;
+    background: #FFF;
+    border: 1px solid #E5E5E5;
+    padding-left: 10px;
+  }
+
+  > div.signupInputContainer > p {
+    height: 12px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #656565;
+    text-align: left;
+    width: 440px;
+    margin: 7px auto;
+  }
+
+  > div.signupInputContainer > div:first-child > input {
+    width: calc(440px - 88px);
+  }
+
+  > div.signupInputContainer > div:first-child > button {
+    width: 88px;
+    height: 42px;
+    background: #070707;
+    border: none;
+    font-weight: 400;
+    font-size: 14px;
+    color: #FFF;
+  }
+
+  > button {
+    width: 440px;
+    height: 42px;
+    background: #000;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 30px auto;
   }
 `
