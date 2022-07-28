@@ -78,7 +78,7 @@ const Weather = () => {
             result.push(data.list[i]);
           }
         }
-        const days = result.slice(0, 5);
+        const days = result.slice(0, 4);
         console.log(days);
         setDay(days);
         setData(mappingList);
@@ -98,80 +98,84 @@ const Weather = () => {
   }, [location.latitude]);
 
   return (
-    <>
-      {/* {loading ? null : mainData.weather === "Clear" ? (
-          <div className="Weather_backimg">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxmLy6c2ZmZg43nDGjj2oQNIseFaj1_TuiTyIpBgNe_BzZ3hW5UOEmRxU0WWcXKmyuwXU&usqp=CAU" />
-          </div>
-        ) : mainData.weather === "Mist" ? (
-          <div className="Weather_backimg">
-            <img src="https://www.10wallpaper.com/wallpaper/1366x768/1111/misty-Beautiful_natural_scenery_Desktop_Wallpapers_1366x768.jpg" />
-          </div>
-        ) : mainData.weather === "Rain" ? (
-          <div className="Weather_backimg">
-            <img src="https://c.wallhere.com/photos/83/ac/photography_water_monochrome_rain_glass_lights-77676.jpg!d" />
-          </div>
-        ) : (
-          <div className="Weather_backimg">
-            <img src="https://blog.kakaocdn.net/dn/bb8JPu/btqAy2n9ICw/ImlkUSOmY1yLdjrGuIKhgK/img.jpg" />
-          </div>
-        )} */}
+    <div className="Weather">
       <section className="Weather-main">
+        <img src={`/img/subweather.png`} alt="날씨이" />
         {mainData &&
           mainData.map((el, idx) => (
-            <div key={idx} className="Weather-main__">
-              {/* <img
-                  src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
-                  alt="날씨이"
-                /> */}
+            <div key={idx} className="Weather-main__box">
               <span className="Weather-main__weather">
                 {el.name} <br />
-                {Math.round(el.temp)}°C <br />
+                <p>{Math.round(el.temp)}°</p>
                 {el.status}
                 <br />
-                {`최고: ${Math.round(el.maxtemp)}°C 최저: ${Math.round(
+                {`최고:${Math.round(el.maxtemp)}° 최저:${Math.round(
                   el.mintemp
-                )}°C`}
+                )}°`}
               </span>
             </div>
           ))}
         <span className="Weather-main__clause">오늘의 날씨 정보</span>
       </section>
       <div className="Weather-sub">
+        <p>Hourly</p>
         {datas &&
           datas.map((el, idx) => (
-            <span key={idx} className="">
-              <span className="Weather-sub__icon">
+            <span className="Weather-text" key={idx}>
+              <span>{el.time.slice(11, 13)}시</span>
+              <span>
                 <img
                   src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
                   alt="날씨"
                 />
               </span>
-              <span className="Weather_text">
-                <span>{el.times}</span>
-                <span>{el.time.slice(11, 13)}시</span>
-                <span>{Math.round(el.temp)}°C</span>
+              <span className="Weather-text__celc">{Math.round(el.temp)}°</span>
+            </span>
+          ))}
+      </div>
+      <div className="Weather-bottom">
+        <p className="Weather-bottom__weekly">Weekly</p>
+        {mainData &&
+          mainData.map((el, idx) => (
+            <div key={idx} className="Weather-bottom__box">
+              <span className="Weather-bottom__weather">
+                오늘 <br />
+                <img
+                  src={`http://openweathermap.org/img/wn/${el.icon}@2x.png`}
+                  alt="날씨"
+                />
+                <br />
+                <span>
+                  <p>{`${Math.round(el.maxtemp)}°`}</p>
+                  <p>{`${Math.round(el.mintemp)}°`}</p>
+                </span>
               </span>
-            </span>
+            </div>
           ))}
+        <div className="Weather-bottom__week">
+          {day &&
+            day.map((el, idx) => (
+              <span className="Weather-bottom__element" key={idx}>
+                <span>
+                  {new Date(el.dt_txt)
+                    .toLocaleDateString("ko-KR", {
+                      weekday: "long",
+                    })
+                    .slice(0, 1)}
+                </span>
+                <span className="weather-weather">
+                  <img
+                    src={`http://openweathermap.org/img/wn/${el.weather[0].icon}@2x.png`}
+                    alt="날씨"
+                  />
+                </span>
+                <span>{`${Math.round(el.main.temp_min) + 4}°`}</span>
+                <span>{`${Math.round(el.main.temp_min)}°`}</span>
+              </span>
+            ))}
+        </div>
       </div>
-      <div>
-        {day &&
-          day.map((el, idx) => (
-            <span key={idx}>
-              {new Date(el.dt_txt).toLocaleDateString("ko-KR", {
-                weekday: "long",
-              })}
-              <img
-                src={`http://openweathermap.org/img/wn/${el.weather[0].icon}@2x.png`}
-                alt="날씨"
-              />
-              {Math.round(el.main.temp_min) + 2}
-              {Math.round(el.main.temp_min)}
-            </span>
-          ))}
-      </div>
-    </>
+    </div>
   );
 };
 
