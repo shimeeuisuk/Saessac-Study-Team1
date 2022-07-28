@@ -145,6 +145,7 @@
   justify-content: center;
   font-size: 27px;
   font-weight: 600;
+  color: #636363;
 }
 .Weather-bottom__weather span {
   display: flex;
@@ -170,7 +171,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: #636363;
   font-size: 27px;
+  font-weight: 700;
 }
 .Weather-bottom__element:not(:last-of-type) {
   border-bottom: 1px solid black;
