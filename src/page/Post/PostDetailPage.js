@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import { DeleteModal } from "components/DeleteModal";
+import Chat from "../../components/Chat";
+import { loadIcon } from "@iconify/react";
 
 const Container = styled.div`
   width: 800px;
@@ -85,7 +87,7 @@ const Foot = styled.div`
 
 export default function PostDetail() {
   const [detail, setDetail] = useState({});
-  // const [Loading, setLoading] = useState(true);
+  const [Loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   let params = useParams();
 
@@ -94,23 +96,26 @@ export default function PostDetail() {
   };
 
   useEffect(() => {
-    axios.get(`http://34.168.215.145/topic/${params.id}`).then((res) => {
-      const data = res.data[0];
-      setDetail({ ...data });
-
-      // setLoading(false);
-    });
+    axios
+      .get(`http://34.168.215.145/topic/${params.id}`)
+      .then((res) => {
+        const data = res.data[0];
+        setDetail({ ...data });
+        console.log({ ...data });
+        setLoading(false);
+      })
+      .catch(console.log("err"));
   }, []);
-
+  if (Loading) return null;
   return (
     <Container>
       <Head>
+        {console.log(detail.tid)};
         <div className="type">
           {detail.type === "friend"
             ? "런닝메이트 구합니다!"
             : "런닝 장소 추천합니다!"}
         </div>
-
         {detail.type === "friend" ? (
           <div className="recruit">
             {detail.recruit === "recruiting" ? "모집중" : "모집완료"}
@@ -134,6 +139,9 @@ export default function PostDetail() {
           />
         ) : null}
       </Foot>
+      <section>
+        <Chat tid={detail.tid} />
+      </section>
     </Container>
   );
 }
