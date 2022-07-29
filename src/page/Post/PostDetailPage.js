@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FaCommentDots } from "react-icons/fa";
 import { FcSettings } from "react-icons/fc";
 import { useSelector } from "react-redux";
+import Chat from "components/Chat";
 
 export default function PostDetail() {
   const state = useSelector((state) => state.signinReducer);
@@ -19,7 +20,7 @@ export default function PostDetail() {
       setLoading(false);
     });
   }, []);
-
+  if (loading) return null;
   return (
     <Container>
       <Head>
@@ -78,11 +79,13 @@ export default function PostDetail() {
           </Title>
           <Content>{detail.topicContents}</Content>
         </Bottom>
+        <section>
+          <Chat tid={detail.tid} />
+        </section>
       </Body>
     </Container>
   );
 }
-
 
 const Container = styled.div`
   margin-top: 45px;
@@ -277,5 +280,3 @@ const Content = styled.div`
   overflow-y: auto;
   display: flex;
 `;
-
-
