@@ -83,6 +83,7 @@ export default function PostDetail() {
   );
 }
 
+
 const Container = styled.div`
   margin-top: 45px;
   width: 100%;
@@ -265,6 +266,7 @@ const Title = styled.div`
     height: 20px;
   }
 `;
+
 const Content = styled.div`
   margin-top: 10px;
   width: 760px;
@@ -275,3 +277,5 @@ const Content = styled.div`
   overflow-y: auto;
   display: flex;
 `;
+
+
