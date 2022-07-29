@@ -12,7 +12,7 @@ import Navbar from "./Navbar";
 import RequireAuth from "./RequireAuth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setSignState } from "../action/action";
+import { setSignState, setUserData } from "../action/action";
 import { getLoginCookie } from "../lib/cookie";
 import Loading from "../components/Loading";
 import Weather from "./Weather";
@@ -23,7 +23,7 @@ const axios = require("axios");
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const [viewModal, setModal] = useState(false)
+  const [viewModal, setModal] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -31,15 +31,17 @@ function App() {
         headers: { authorization: getLoginCookie() },
       });
       dispatch(setSignState(res.data.msg));
+      delete res.data.msg;
+      dispatch(setUserData(res.data));
       setLoading(false);
     })();
-  });
+  }, []);
 
   if (loading) return <Loading></Loading>;
 
   return (
     <div className="App">
-      <Navbar viewModal={viewModal} setModal={setModal}/>
+      <Navbar viewModal={viewModal} setModal={setModal} />
       <Routes>
         <Route path="/" element={<Main />}></Route>
         <Route
@@ -79,11 +81,9 @@ function App() {
         <Route path="/weather" element={<Weather />}></Route>
         <Route path="/chat" element={<Chat />}></Route>
       </Routes>
-      {
-        viewModal ?
-        <Signin viewModal={viewModal} setModal={setModal}></Signin> :
-        null
-      }
+      {viewModal ? (
+        <Signin viewModal={viewModal} setModal={setModal}></Signin>
+      ) : null}
       <Link to="/">
         <p>메인</p>
       </Link>
