@@ -1,41 +1,27 @@
-import axios from "axios";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { getLoginCookie } from "lib/cookie";
+import { Link } from "react-router-dom";
 
-export default function DeleteModal({ data, deleteModal, setDeleteModal }) {
-  const navigate = useNavigate();
-
+export default function WriteCancelModal({
+  WriteCancelModal,
+  setWriteCancelModal,
+}) {
   const closeModal = () => {
-    setDeleteModal(false);
+    setWriteCancelModal(false);
   };
-
-  const DeletePost = () => {
-    axios
-      .delete(`http://34.168.215.145/topic/${data.tid}`, {
-        headers: { Authorization: getLoginCookie() },
-      })
-      .then((res) => {
-        closeModal();
-        navigate("/postlist");
-      });
-  };
-
   return (
     <ModalBackdrop onClick={closeModal}>
       <Container>
         <Top>
-          <div className="title">글 삭제</div>
-          <div className="checkmessage">정말로 삭제하시겠습니까?</div>
+          <div className="title">글 작성 취소</div>
+          <div className="checkmessage">정말로 취소하시겠습니까?</div>
         </Top>
         <Bottom>
           <button className="cancel" onClick={closeModal}>
             취소
           </button>
-
-          <button className="confirm" onClick={DeletePost}>
-            확인
-          </button>
+          <Link to="/postlist">
+            <button className="confirm">확인</button>
+          </Link>
         </Bottom>
       </Container>
     </ModalBackdrop>

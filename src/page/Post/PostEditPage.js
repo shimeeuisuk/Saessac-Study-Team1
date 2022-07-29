@@ -1,121 +1,34 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import DropBox from "../../components/DropBox";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import LocationDropBox from "components/LocationDropBox";
+import { useNavigate } from "react-router-dom";
 import { getLoginCookie } from "../../lib/cookie";
-
-const Container = styled.div`
-  width: 800px;
-  height: 900px;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Head = styled.div`
-  height: 50px;
-  width: 800px;
-  border: 1px solid #0fa958;
-  display: flex;
-  align-items: center;
-  .runningmate {
-    margin: 0px 10px 0px 10px;
-    display: flex;
-    align-items: center;
-  }
-  .location {
-    display: flex;
-    align-items: center;
-    margin-right: 150px;
-  }
-  .runningmate-text {
-    margin-left: 10px;
-  }
-  .location-text {
-    margin-left: 10px;
-  }
-  .recruit {
-    width: 150px;
-    height: 40px;
-    background-color: #d9d9d9;
-    border-radius: 5rem;
-    margin-right: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .active {
-    width: 30px;
-    height: 30px;
-    background-color: #0fa958;
-    border-radius: 100%;
-    cursor: pointer;
-  }
-  .deactive {
-    width: 30px;
-    height: 30px;
-    background-color: #d9d9d9;
-    border-radius: 100%;
-    cursor: pointer;
-  }
-`;
-
-const Title = styled.input`
-  height: 80px;
-  width: 800px;
-  border: 1px solid #0fa958;
-`;
-
-const Content = styled.input`
-  width: 800px;
-  height: 650px;
-  border: 1px solid #0fa958;
-`;
-
-const Foot = styled.div`
-  width: 800px;
-  height: 120px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  button {
-    &:hover {
-      border: 2px solid white;
-    }
-    cursor: pointer;
-    margin: 0px 30px 0px 30px;
-  }
-  .complete {
-    width: 80px;
-    height: 40px;
-    border-radius: 5rem;
-    background-color: #0fa958;
-    border: 0.5px solid #0fa958;
-    color: white;
-  }
-  .cancel {
-    width: 80px;
-    height: 40px;
-    border-radius: 5rem;
-    background-color: #d9d9d9;
-    border: 0.5px solid #d9d9d9;
-  }
-`;
+import { useLocation } from "react-router-dom";
+import EditCancelModal from "components/EditCacelModal";
+import { WriteModal } from "components/WriteModal";
+import DeleteModal from "components/DeleteModal";
 
 export default function PostEditPage() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [type, setType] = useState("");
-  const [location, setLocation] = useState([]);
-  const [selected, setSelected] = useState("");
-  const [recruit, setRecruit] = useState("");
-  const [tid, setTid] = useState(0);
-  let params = useParams();
+  const loaction = useLocation();
+  const data = loaction.state.detail;
+  const [selected, setSelected] = useState(data.locationName);
+  const [title, setTitle] = useState(data.topicTitle);
+  const [content, setContent] = useState(data.topicContents);
+  const [locations, setLocation] = useState([]);
+  const [recruit, setRecruit] = useState(data.recruit);
+  const [editCancelModal, setEditCancelModal] = useState(false);
+  const [writeModal, setWriteModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const navigate = useNavigate();
 
+  const recruitHandler = () => {
+    if (recruit === "recruited") {
+      setRecruit("recruiting");
+    } else {
+      setRecruit("recruited");
+    }
+  };
   useEffect(() => {
     (async () => {
       const res = await axios.get("http://34.168.215.145/location/list");
@@ -123,21 +36,8 @@ export default function PostEditPage() {
     })();
   }, []);
 
-  useEffect(() => {
-    axios.get(`http://34.168.215.145/topic/${params.id}`).then((res) => {
-      const data = { ...res.data[0] };
-      setTitle(data.topicTitle);
-      setContent(data.topicContents);
-      setType(data.type);
-      setRecruit(data.recruit);
-      setTid(data.tid);
-      console.log(tid);
-      // setLoading(false);
-    });
-  }, []);
-
   const editPost = () => {
-    const selectedlocation = location.filter((el) => {
+    const selectedlocation = locations.filter((el) => {
       return el.locationName === selected;
     });
     const putForm = {
@@ -149,7 +49,7 @@ export default function PostEditPage() {
     console.log(selected);
     console.log(putForm);
     axios
-      .put(`http://34.168.215.145/topic/${tid}`, putForm, {
+      .put(`http://34.168.215.145/topic/${data.tid}`, putForm, {
         headers: { Authorization: getLoginCookie() },
       })
       .then((msg) => {
@@ -160,54 +60,239 @@ export default function PostEditPage() {
 
   return (
     <Container>
-      <Head>
-        <div className="runningmate">
-          <div className={type === "friend" ? "active" : "deactive"}></div>
-          <div className="runningmate-text">런닝메이트 구합니다!</div>
-        </div>
-        <div className="location">
-          <div className={type === "location" ? "active" : "deactive"}></div>
-          <div className="location-text">런닝 장소 추천합니다!</div>
-        </div>
-        {type === "friend" ? (
-          <div
-            className="recruit"
-            onClick={() => {
-              if (recruit === "recruited") {
-                setRecruit("recruting");
-              } else {
-                setRecruit("recruited");
-              }
-            }}
-          >
-            {recruit === "recruited" ? "모집완료" : "모집중"}
+      <Box>
+        <div className="newpost">글 수정</div>
+        <Top>
+          <img src={`http://34.168.215.145/${data.userPicture}`} />
+          <span className="usernickname">{data.nickName}</span>
+          {data.type === "friend" ? (
+            <div className={recruit} onClick={recruitHandler}>
+              {recruit === "recruiting" ? "모집중" : "모집완료"}
+            </div>
+          ) : null}
+        </Top>
+        <Bottom>
+          <div className="typedropbox">
+            {data.type === "friend"
+              ? "런닝 메이트를 찾아요!"
+              : "런닝 장소를 추천하고 싶어요!"}
           </div>
+          <LocationDropBox
+            selected={selected}
+            setSelected={setSelected}
+            locations={locations}
+          />
+          <Title
+            required
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            defaultValue={title}
+          ></Title>
+          <Content
+            required
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+            defaultValue={content}
+          ></Content>
+          <Buttons>
+            <button
+              className="delete"
+              onClick={() => {
+                setDeleteModal(true);
+              }}
+            >
+              삭제
+            </button>
+            <button
+              className="cancel"
+              onClick={() => {
+                setEditCancelModal(true);
+              }}
+            >
+              취소
+            </button>
+            <button
+              className="post"
+              onClick={
+                title === "" || content === ""
+                  ? () => {
+                      setWriteModal(true);
+                    }
+                  : editPost
+              }
+            >
+              등록
+            </button>
+          </Buttons>
+        </Bottom>
+        {deleteModal ? (
+          <DeleteModal
+            deleteModal={deleteModal}
+            setDeleteModal={setDeleteModal}
+            data={data}
+          />
         ) : null}
-        <DropBox setSelected={setSelected} location={location} />
-      </Head>
-      <Title
-        value={title}
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-        // placeholder={detail.topicTitle}
-      ></Title>
-      <Content
-        value={content}
-        onChange={(e) => {
-          setContent(e.target.value);
-        }}
-        placeholder="내용을 입력해 주세요"
-      ></Content>
-      <Foot>
-        <button className="complete" onClick={editPost}>
-          수정
-        </button>
+        {writeModal ? (
+          <WriteModal writeModal={writeModal} setWriteModal={setWriteModal} />
+        ) : null}
 
-        <Link to="/postlist">
-          <button className="cancel">취소</button>
-        </Link>
-      </Foot>
+        {editCancelModal ? (
+          <EditCancelModal
+            editCancelModal={editCancelModal}
+            setEditCancelModal={setEditCancelModal}
+          />
+        ) : null}
+      </Box>
     </Container>
   );
 }
+
+const Container = styled.div`
+  margin-top: 45px;
+  width: 100%;
+  height: 1024px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Box = styled.div`
+  width: 810px;
+  height: 770px;
+  .newpost {
+    width: 130px;
+    height: 35px;
+    font-size: 30px;
+    font-weight: bold;
+  }
+`;
+const Top = styled.div`
+  margin-top: 15px;
+  width: 810px;
+  height: 70px;
+  border: 2px solid #999999;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 20px;
+  }
+  .usernickname {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .recruiting {
+    margin-left: 500px;
+    width: 90px;
+    height: 37px;
+    background-color: #fbdbe7;
+    color: #ea4c89;
+    font-weight: bold;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .recruited {
+    margin-left: 500px;
+    width: 90px;
+    height: 37px;
+    background-color: #e2dfe1;
+    color: #6f6f6f;
+    font-weight: bold;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+`;
+const Bottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 28px;
+  width: 810px;
+  height: 625px;
+  border: 2px solid #999999;
+  .typedropbox {
+    text-indent: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: 35px;
+    width: 715px;
+    height: 35px;
+    border: 2px solid #999999;
+  }
+`;
+const Buttons = styled.div`
+  margin-top: 60px;
+  width: 715px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  .delete {
+    background-color: #ff5045;
+    border: 1px solid #ff5045;
+    border-radius: 0.5rem;
+    color: white;
+    width: 70px;
+    height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+  .cancel {
+    margin-left: 470px;
+    background-color: white;
+    border: 1px solid #999999;
+    border-radius: 0.5rem;
+    width: 70px;
+    height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+  .post {
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    color: white;
+    width: 70px;
+    height: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      transform: scale(0.95);
+    }
+  }
+`;
+const Title = styled.input`
+  text-indent: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  width: 715px;
+  height: 35px;
+  border: 2px solid #999999;
+`;
+const Content = styled.input`
+  text-indent: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  width: 715px;
+  height: 325px;
+  border: 2px solid #999999;
+`;

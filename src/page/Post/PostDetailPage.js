@@ -2,13 +2,92 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import { DeleteModal } from "components/DeleteModal";
-import Chat from "../../components/Chat";
-import { loadIcon } from "@iconify/react";
+import { FaCommentDots } from "react-icons/fa";
+import { FcSettings } from "react-icons/fc";
+import { useSelector } from "react-redux";
+
+export default function PostDetail() {
+  const state = useSelector((state) => state.signinReducer);
+  const [detail, setDetail] = useState({});
+  const [loading, setLoading] = useState(true);
+  let params = useParams();
+
+  useEffect(() => {
+    axios.get(`http://34.168.215.145/topic/${params.id}`).then((res) => {
+      const data = res.data[0];
+      setDetail({ ...data });
+      setLoading(false);
+    });
+  }, []);
+
+  return (
+    <Container>
+      <Head>
+        {detail.type === "friend" ? (
+          <MateType>MATE</MateType>
+        ) : (
+          <LocationType>PLACE</LocationType>
+        )}
+        <Link to="/postwrite">
+          <button className="button">글 작성하기</button>
+        </Link>
+      </Head>
+      <Body>
+        <Top>
+          <div className="left">
+            {loading ? null : (
+              <img src={`http://34.168.215.145/${detail.userPicture}`} />
+            )}
+          </div>
+          <div className="middle">
+            <div className="nickname">{detail.nickName}</div>
+            <div className="createdDate">
+              {new Date(detail.created_at).toLocaleString()}
+            </div>
+          </div>
+          <Reply>
+            <FaCommentDots /> 2
+          </Reply>
+          <div className="right">
+            <span
+              className={
+                detail.type === "friend" ? "matelocation" : "placelocation"
+              }
+            >
+              서울 {detail.locationName}
+            </span>
+            {detail.type === "friend" ? (
+              <span
+                className={
+                  detail.recruit === "recruiting" ? "recruiting" : "recruited"
+                }
+              >
+                {detail.recruit === "recruiting" ? "모집중" : "모집완료"}
+              </span>
+            ) : null}
+          </div>
+        </Top>
+        <Bottom>
+          <Title>
+            <span className="title">{detail.topicTitle}</span>
+            {state.loginState && state.data.userid === detail.userID ? (
+              <Link to={`/postedit/${detail.tid}`} state={{ detail: detail }}>
+                <FcSettings className="setting" />
+              </Link>
+            ) : null}
+          </Title>
+          <Content>{detail.topicContents}</Content>
+        </Bottom>
+      </Body>
+    </Container>
+  );
+}
+
 
 const Container = styled.div`
-  width: 800px;
-  height: 900px;
+  margin-top: 45px;
+  width: 100%;
+  height: 1024px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -16,132 +95,187 @@ const Container = styled.div`
 `;
 
 const Head = styled.div`
-  width: 760px;
-  height: 80px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  .type {
-    width: 250px;
-    height: 40px;
-    background-color: #0fa958;
-    border-radius: 5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 62px;
+  width: 810px;
+  .button {
+    margin-left: 490px;
+    margin-top: 15px;
+    width: 127px;
+    height: 42px;
+    border-radius: 0.5rem;
+    border: 1px solid black;
+    background-color: black;
     color: white;
-  }
-  .recruit {
-    width: 150px;
-    height: 40px;
-    background-color: #d9d9d9;
-    border-radius: 5rem;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
   }
 `;
-
-const Title = styled.div`
-  height: 60px;
-  width: 760px;
-  border: 1px solid #0fa958;
+const MateType = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  padding-top: 5px;
+  background-color: #c3ff75;
+  vertical-align: center;
+  height: 52px;
+  width: 185px;
+  transition: 0.3s;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 800;
+  box-shadow: 5px 5px black;
+  margin-right: 22px;
+`;
+const LocationType = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  padding-top: 5px;
+  background-color: #a674fe;
+  vertical-align: center;
+  height: 52px;
+  width: 185px;
+  transition: 0.3s;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 800;
+  box-shadow: 5px 5px black;
+  margin-right: 22px;
+`;
+const Body = styled.div`
+  height: 330px;
+  width: 810px;
+  border: 1px solid #999999;
+`;
+const Top = styled.div`
+  height: 80px;
+  width: 810px;
+  border: 1px solid #999999;
+  display: flex;
+  align-items: center;
+  .left > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 20px;
+  }
+  .middle {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nickname {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .createdDate {
+    font-size: 18px;
+    font-weight: bold;
+    color: #b5b1b1;
+  }
+  .right {
+    margin-left: 270px;
+    display: flex;
+  }
+  .matelocation {
+    margin-left: 18px;
+    width: 100px;
+    height: 37px;
+    background-color: #b5eed4;
+    border-radius: 2rem;
+    color: #247f51;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .placelocation {
+    margin-left: 100px;
+    width: 100px;
+    height: 37px;
+    background-color: #e5cbff;
+    color: #7845af;
+    font-weight: bold;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .recruiting {
+    margin-left: 10px;
+    width: 90px;
+    height: 37px;
+    background-color: #fbdbe7;
+    color: #ea4c89;
+    font-weight: bold;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .recruited {
+    margin-left: 10px;
+    width: 90px;
+    height: 37px;
+    background-color: #e2dfe1;
+    color: #6f6f6f;
+    font-weight: bold;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+const Reply = styled.span`
+  margin-left: 10px;
+  margin-top: 20px;
+`;
+const Bottom = styled.div`
+  height: 250px;
+  width: 810px;
+  border: 1px solid #999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
+const Title = styled.div`
+  width: 760px;
+  height: 60px;
+  border-bottom: 1px solid #999999;
+  font-size: 30px;
+  font-weight: bold;
+  align-items: center;
+  display: flex;
+  justify-content: left;
+  .title {
+    align-items: center;
+    overflow-y: auto;
+    display: flex;
+    justify-content: left;
+    width: 600px;
+    height: 60px;
+    overflow-y: auto;
+  }
+  .setting {
+    margin-left: 130px;
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const Content = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
   width: 760px;
-  height: 350px;
-  border: 1px solid #0fa958;
-`;
-
-const Foot = styled.div`
-  width: 800px;
-  height: 120px;
-  display: flex;
-  justify-content: center;
+  height: 190px;
+  font-size: 15px;
   align-items: center;
-
-  button {
-    &:hover {
-      border: 2px solid white;
-    }
-    cursor: pointer;
-    margin: 0px 30px 0px 30px;
-  }
-  .edit {
-    width: 80px;
-    height: 40px;
-    border-radius: 5rem;
-    background-color: #0fa958;
-    border: 0.5px solid #0fa958;
-    color: white;
-  }
-  .delete {
-    width: 80px;
-    height: 40px;
-    border-radius: 5rem;
-    background-color: #d9d9d9;
-    border: 0.5px solid #d9d9d9;
-  }
+  justify-content: start;
+  overflow-y: auto;
+  display: flex;
 `;
 
-export default function PostDetail() {
-  const [detail, setDetail] = useState({});
-  const [Loading, setLoading] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
-  let params = useParams();
 
-  const openModal = () => {
-    setModalOpen(true);
-  };
-
-  useEffect(() => {
-    axios
-      .get(`http://34.168.215.145/topic/${params.id}`)
-      .then((res) => {
-        const data = res.data[0];
-        setDetail({ ...data });
-        console.log({ ...data });
-        setLoading(false);
-      })
-      .catch(console.log("err"));
-  }, []);
-  if (Loading) return null;
-  return (
-    <Container>
-      <Head>
-        {console.log(detail.tid)};
-        <div className="type">
-          {detail.type === "friend"
-            ? "런닝메이트 구합니다!"
-            : "런닝 장소 추천합니다!"}
-        </div>
-        {detail.type === "friend" ? (
-          <div className="recruit">
-            {detail.recruit === "recruiting" ? "모집중" : "모집완료"}
-          </div>
-        ) : null}
-      </Head>
-      <Title>{detail.topicTitle}</Title>
-      <Content>{detail.topicContents}</Content>
-      <Foot>
-        <Link to={`/postedit/${detail.tid}`}>
-          <button className="edit">수정</button>
-        </Link>
-        <button className="delete" onClick={openModal}>
-          삭제
-        </button>
-        {modalOpen ? (
-          <DeleteModal
-            modalOpen={modalOpen}
-            setModalOpen={setModalOpen}
-            detail={detail}
-          />
-        ) : null}
-      </Foot>
-      <section>
-        <Chat tid={detail.tid} />
-      </section>
-    </Container>
-  );
-}
