@@ -5,6 +5,19 @@ import ChatPagination from "./ChatPagination";
 import { getLoginCookie } from "../lib/cookie";
 import { BsTrash } from "react-icons/bs";
 
+const Container = styled.div`
+  width: 810px;
+  height: 500px;
+`;
+const CommentLength = styled.div`
+  height: 38px;
+  display: flex;
+  border: 1px solid black;
+  text-align: left;
+  align-items: center;
+  padding-left: 20px;
+  font-weight: 600;
+`;
 export const ChatContainer = styled.div`
   background: tomato;
 `;
@@ -13,7 +26,6 @@ export const ChatList = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   background: skyblue;
 `;
 
@@ -26,7 +38,9 @@ const BsTrashes = styled.div`
 `;
 
 const ChatForm = styled.div`
+  border: 1px solid black;
   display: flex;
+  height: 130px;
   img {
     width: 30px;
     height: 30px;
@@ -90,8 +104,8 @@ const Chat = ({ tid }) => {
   if (loading) return null;
   // console.log(comment[0].userPicture);
   return (
-    <>
-      <div>댓글 {comment.length}</div>
+    <Container>
+      <CommentLength>댓글 {comment.length}</CommentLength>
       <ChatContainer>
         <ChatList>
           {comment.slice(offset, offset + limit).map((e, i) => (
@@ -106,7 +120,12 @@ const Chat = ({ tid }) => {
             </ChatForm>
           ))}
         </ChatList>
-        <ChatInput onChange={handleInput} onKeyPress={handleInput} />
+        <ChatInput
+          type="text"
+          onChange={handleInput}
+          onKeyPress={handleInput}
+          placeholder="댓글 쓰기"
+        />
         <div>
           <ChatPagination
             total={comment.length}
@@ -116,7 +135,7 @@ const Chat = ({ tid }) => {
           />
         </div>
       </ChatContainer>
-    </>
+    </Container>
   );
 };
 
