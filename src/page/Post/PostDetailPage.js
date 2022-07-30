@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import { FcSettings } from "react-icons/fc";
@@ -11,6 +11,7 @@ export default function PostDetail() {
   const state = useSelector((state) => state.signinReducer);
   const [detail, setDetail] = useState({});
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   let params = useParams();
 
   useScroll();
@@ -28,9 +29,21 @@ export default function PostDetail() {
     <Container>
       <Head>
         {detail.type === "friend" ? (
-          <MateType>MATE</MateType>
+          <MateType
+            onClick={() => {
+              navigate("/postlist");
+            }}
+          >
+            MATE
+          </MateType>
         ) : (
-          <LocationType>PLACE</LocationType>
+          <LocationType
+            onClick={() => {
+              navigate("/postlist");
+            }}
+          >
+            PLACE
+          </LocationType>
         )}
         <Link to="/postwrite">
           <button className="button">글 작성하기</button>
@@ -129,6 +142,7 @@ const MateType = styled.div`
   font-weight: 800;
   box-shadow: 5px 5px black;
   margin-right: 22px;
+  cursor: pointer;
 `;
 const LocationType = styled.div`
   display: flex;
@@ -145,6 +159,7 @@ const LocationType = styled.div`
   font-weight: 800;
   box-shadow: 5px 5px black;
   margin-right: 22px;
+  cursor: pointer;
 `;
 const Body = styled.div`
   width: 810px;
