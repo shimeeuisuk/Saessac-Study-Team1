@@ -31,7 +31,6 @@ const Weather = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         const mainweather = [
           {
             name: data.name,
@@ -58,7 +57,6 @@ const Weather = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         const filteredList = data.list.filter((el, idx) => idx > 1 && idx < 7);
         const mappingList = filteredList.map((el) => ({
           name: el.name,
@@ -79,7 +77,6 @@ const Weather = () => {
           }
         }
         const days = result.slice(0, 4);
-        console.log(days);
         setDay(days);
         setData(mappingList);
       })
