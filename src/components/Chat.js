@@ -151,7 +151,7 @@ export default Chat;
 
 const Container = styled.div`
   width: 810px;
-  height: 1000px;
+
   margin-top: 10px;
 `;
 const CommentLength = styled.div`
