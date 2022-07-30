@@ -4,11 +4,10 @@ import "../css/Main.css";
 const { useState, useEffect } = require("react");
 
 function Main() {
-  const apiKey = "c804c2461e2d3849e26d07926609f755";
+  const apiKey = process.env.REACT_APP_API_KEY;
   const [datas, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [location, setLocation] = useState({ latitude: null, longitude: null });
-
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (data) => {
