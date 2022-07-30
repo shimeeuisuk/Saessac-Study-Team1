@@ -24,11 +24,9 @@ const Weather = () => {
     );
   };
 
-  const getMainWeather = () => {
+  const getMainWeather = (url) => {
     setLoading(true);
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&units=metric`
-    )
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         const mainweather = [
@@ -50,11 +48,9 @@ const Weather = () => {
       });
   };
 
-  const getWeekWeather = () => {
+  const getWeekWeather = (url) => {
     setLoading(true);
-    fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&units=metric`
-    )
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         const filteredList = data.list.filter((el, idx) => idx > 1 && idx < 7);
@@ -89,8 +85,19 @@ const Weather = () => {
   useEffect(() => {
     getLocation();
     if (location.latitude !== null && location.latitude !== "err") {
-      getMainWeather();
-      getWeekWeather();
+      getMainWeather(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&units=metric`
+      );
+      getWeekWeather(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&units=metric`
+      );
+    } else {
+      getMainWeather(
+        `https://api.openweathermap.org/data/2.5/weather?id=1838524&appid=${apiKey}&units=metric`
+      );
+      getWeekWeather(
+        `https://api.openweathermap.org/data/2.5/forecast?id=1838524&appid=${apiKey}&units=metric`
+      );
     }
   }, [location.latitude]);
 
