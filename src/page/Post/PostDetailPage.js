@@ -90,7 +90,6 @@ export default function PostDetail() {
 const Container = styled.div`
   margin-top: 45px;
   width: 100%;
-
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -149,7 +148,6 @@ const LocationType = styled.div`
 `;
 const Body = styled.div`
   width: 810px;
-  height: 330px;
   border: 1px solid #999999;
 `;
 const Top = styled.div`
@@ -234,7 +232,6 @@ const Top = styled.div`
 `;
 
 const Bottom = styled.div`
-  height: 250px;
   width: 810px;
   border: 1px solid #999999;
   display: flex;
@@ -244,7 +241,6 @@ const Bottom = styled.div`
 `;
 const Title = styled.div`
   width: 760px;
-  height: 60px;
   border-bottom: 1px solid #999999;
   font-size: 30px;
   font-weight: bold;
@@ -252,13 +248,13 @@ const Title = styled.div`
   display: flex;
   justify-content: left;
   .title {
+    min-height: 63px;
+    word-break: break-all;
     align-items: center;
-    overflow-y: auto;
     display: flex;
     justify-content: left;
     width: 600px;
-    height: 60px;
-    overflow-y: auto;
+    text-align: left;
   }
   .setting {
     margin-left: 130px;
@@ -268,13 +264,13 @@ const Title = styled.div`
 `;
 
 const Content = styled.div`
+  min-height: 185px;
+  word-break: break-all;
   margin-top: 10px;
   width: 760px;
-  height: 190px;
   font-size: 15px;
   align-items: center;
   justify-content: start;
-  overflow-y: auto;
   display: flex;
   text-align: left;
 `;
