@@ -8,7 +8,6 @@ import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForward } from "react-icons/io5";
 import axios from "axios";
 import useScroll from "util/useScroll";
-import { useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { select } from "action/action";
 
@@ -16,7 +15,6 @@ export default function PostListPage() {
   const [page, setPage] = useState(1);
   const [totalTopic, setTotalTopic] = useState(0);
   const totalPage = Math.ceil(totalTopic / 6);
-  const loaction = useLocation();
   const selectedTab = useSelector((state) => state.selectedTabReducer);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
