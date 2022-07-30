@@ -16,7 +16,6 @@
   position: relative;
 }
 .main-top__weather {
-  border: 1px solid red;
   display: flex;
   align-items: center;
   justify-content: center;
