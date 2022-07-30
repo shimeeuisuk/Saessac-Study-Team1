@@ -21,6 +21,7 @@ export default function PostDetail() {
     });
   }, []);
   if (loading) return null;
+  console.log(state);
   return (
     <Container>
       <Head>
@@ -80,7 +81,7 @@ export default function PostDetail() {
           <Content>{detail.topicContents}</Content>
         </Bottom>
         <section>
-          <Chat tid={detail.tid} type={detail.type} />
+          <Chat detail={detail} tid={detail.tid} type={detail.type} />
         </section>
       </Body>
     </Container>
