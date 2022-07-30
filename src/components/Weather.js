@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "../css/Weather.css";
 
 const Weather = () => {
-  const apiKey = "c804c2461e2d3849e26d07926609f755";
+  const apiKey = process.env.REACT_APP_API_KEY;
   const [datas, setData] = useState(null);
   const [mainData, setMainData] = useState(null);
   const [loading, setLoading] = useState(true);
