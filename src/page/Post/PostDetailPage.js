@@ -80,7 +80,7 @@ export default function PostDetail() {
           <Content>{detail.topicContents}</Content>
         </Bottom>
         <section>
-          <Chat tid={detail.tid} />
+          <Chat tid={detail.tid} type={detail.type} />
         </section>
       </Body>
     </Container>
