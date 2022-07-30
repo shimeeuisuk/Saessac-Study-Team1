@@ -31,7 +31,14 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
+.main-top__loading {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .main-top__weather h1 {
   color: rgb(235, 235, 235);
   font-size: 40px;
@@ -188,6 +195,7 @@
 .main-finds {
   left: 35%;
   top: 30%;
+  width: 200px;
   position: absolute;
   transform: translate(-50%, -50%);
   font-weight: 700;

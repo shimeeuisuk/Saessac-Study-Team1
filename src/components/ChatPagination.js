@@ -29,7 +29,7 @@ const Button = styled.button`
     transform: revert;
   }
   &[aria-current] {
-    background: deeppink;
+    background: gray;
     font-weight: bold;
     cursor: revert;
     transform: revert;
