@@ -152,8 +152,8 @@ function Main() {
           ) : (
             <div className="main-top__weather">
               <span>
+                <p>날씨 정보 자세히</p>
                 <Link to="/weather">
-                  <p>날씨 정보 자세히</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

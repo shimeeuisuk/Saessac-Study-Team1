@@ -55,7 +55,7 @@ const Chat = ({ detail, tid, type }) => {
           headers: { Authorization: getLoginCookie() },
         })
         .then((res) => {
-          e.target.value = "";
+          settextAreaComment("");
           getComments();
           setLoading(false);
         });
