@@ -27,3 +27,6 @@ package-lock.json
 
 #vscode
 .vscode
+
+#REACT_APP_API_KEY
+.env

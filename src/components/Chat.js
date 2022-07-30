@@ -203,8 +203,8 @@ const ChatInputContainer = styled.div`
   .img {
     display: flex;
     align-items: center;
-    margin-right: 670px;
-    width: 100px;
+    margin-right: 520px;
+    width: 250px;
     height: 50px;
     > img {
       width: 30px;
@@ -213,6 +213,8 @@ const ChatInputContainer = styled.div`
     }
     > p {
       padding-left: 10px;
+      text-align: left;
+      width: 150px;
     }
   }
   .input {
