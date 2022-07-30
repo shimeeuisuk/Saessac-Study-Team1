@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "../css/Main.css";
 import WeatherImgLoading from "./WeatherImgLoading";
-
+import { useDispatch } from "react-redux";
+import { select } from "../action/action.js";
 const { useState, useEffect } = require("react");
 
 function Main() {
@@ -9,6 +10,9 @@ function Main() {
   const [datas, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (data) => {
@@ -201,17 +205,29 @@ function Main() {
               />
             </svg>
             <div className="main-bottom__left__img">
-              <Link to="/postlist">
+              <div
+                className="main-bottom__navigate"
+                onClick={() => {
+                  navigate("/postlist");
+                  dispatch(select(0));
+                }}
+              >
                 <p>RUNNING MATE</p>
-              </Link>
+              </div>
             </div>
           </div>
           <div className="main-bottom__right">
             <span className="main-finds">Recommend !</span>
             <div className="main-bottom__right__img">
-              <Link to="/postlist">
+              <div
+                className="main-bottom__navigate"
+                onClick={() => {
+                  navigate("/postlist");
+                  dispatch(select(1));
+                }}
+              >
                 <p>RUNNING PLACE</p>
-              </Link>
+              </div>
             </div>
           </div>
         </div>
