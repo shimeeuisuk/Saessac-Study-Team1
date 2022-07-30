@@ -122,7 +122,6 @@ export default function PostWritePage() {
 const Container = styled.div`
   margin-top: 45px;
   width: 100%;
-  height: 1024px;
   background-color: white;
   display: flex;
   flex-direction: column;

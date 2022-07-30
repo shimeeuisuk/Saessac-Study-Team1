@@ -80,10 +80,10 @@ export default function PostDetail() {
           </Title>
           <Content>{detail.topicContents}</Content>
         </Bottom>
-        <section>
-          <Chat detail={detail} tid={detail.tid} type={detail.type} />
-        </section>
       </Body>
+      <section>
+        <Chat detail={detail} tid={detail.tid} type={detail.type} />
+      </section>
     </Container>
   );
 }
@@ -91,7 +91,7 @@ export default function PostDetail() {
 const Container = styled.div`
   margin-top: 45px;
   width: 100%;
-  height: 1024px;
+
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -149,8 +149,8 @@ const LocationType = styled.div`
   margin-right: 22px;
 `;
 const Body = styled.div`
-  height: 330px;
   width: 810px;
+  height: 330px;
   border: 1px solid #999999;
 `;
 const Top = styled.div`

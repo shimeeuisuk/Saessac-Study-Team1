@@ -103,7 +103,7 @@ const Chat = ({ detail, tid, type }) => {
                 </p>
                 <p className="coment">{e.topicComent}</p>
               </div>
-              {state.loginState && state.data.userid === detail.userID ? (
+              {state.loginState && state.data.userid === e.userID ? (
                 <BsTrashes onClick={() => deleteHandler(e.tcid)}>
                   <BsTrash />
                 </BsTrashes>
@@ -151,7 +151,7 @@ export default Chat;
 
 const Container = styled.div`
   width: 810px;
-  height: 1000px;
+
   margin-top: 10px;
 `;
 const CommentLength = styled.div`
@@ -176,7 +176,6 @@ const CommentLengths = styled.div`
 `;
 export const ChatContainer = styled.div`
   width: 810px;
-  height: 600px;
   background: white;
 `;
 
