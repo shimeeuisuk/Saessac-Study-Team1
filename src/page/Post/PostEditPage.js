@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import EditCancelModal from "components/EditCacelModal";
 import { WriteModal } from "components/WriteModal";
 import DeleteModal from "components/DeleteModal";
+import useScroll from "util/useScroll";
 
 export default function PostEditPage() {
   const loaction = useLocation();
@@ -21,6 +22,8 @@ export default function PostEditPage() {
   const [writeModal, setWriteModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const navigate = useNavigate();
+
+  useScroll();
 
   const recruitHandler = () => {
     if (recruit === "recruited") {

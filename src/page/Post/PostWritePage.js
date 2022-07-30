@@ -8,6 +8,7 @@ import { WriteModal } from "components/WriteModal";
 import TypeDropBox from "components/TypeDropBox";
 import { useSelector } from "react-redux";
 import WriteCancelModal from "components/WriteCancelModal";
+import useScroll from "util/useScroll";
 
 export default function PostWritePage() {
   const [title, setTitle] = useState("");
@@ -19,6 +20,8 @@ export default function PostWritePage() {
   const [selectedType, setSelectedType] = useState("");
   const state = useSelector((state) => state.signinReducer);
   const navigate = useNavigate();
+
+  useScroll();
 
   useEffect(() => {
     (async () => {
@@ -68,14 +71,14 @@ export default function PostWritePage() {
             }}
             placeholder="제목을 입력해 주세요"
           ></input>
-          <input
+          <textarea
             className="content"
             required
             onChange={(e) => {
               setContent(e.target.value);
             }}
             placeholder="내용을 입력해 주세요"
-          ></input>
+          ></textarea>
           <Buttons>
             <button
               className="cancel"
@@ -180,6 +183,14 @@ const Bottom = styled.div`
     width: 715px;
     height: 325px;
     border: 2px solid #999999;
+    resize: none;
+  }
+  input::placeholder {
+    padding-left: 10px;
+  }
+  textarea::placeholder {
+    padding-left: 10px;
+    padding-top: 150px;
   }
 `;
 const Buttons = styled.div`
