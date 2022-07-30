@@ -6,12 +6,15 @@ import { FaCommentDots } from "react-icons/fa";
 import { FcSettings } from "react-icons/fc";
 import { useSelector } from "react-redux";
 import Chat from "components/Chat";
+import useScroll from "util/useScroll";
 
 export default function PostDetail() {
   const state = useSelector((state) => state.signinReducer);
   const [detail, setDetail] = useState({});
   const [loading, setLoading] = useState(true);
   let params = useParams();
+
+  useScroll();
 
   useEffect(() => {
     axios.get(`http://34.168.215.145/topic/${params.id}`).then((res) => {
@@ -21,7 +24,7 @@ export default function PostDetail() {
     });
   }, []);
   if (loading) return null;
-  console.log(state);
+
   return (
     <Container>
       <Head>
@@ -47,9 +50,6 @@ export default function PostDetail() {
               {new Date(detail.created_at).toLocaleString()}
             </div>
           </div>
-          <Reply>
-            <FaCommentDots /> 2
-          </Reply>
           <div className="right">
             <span
               className={
@@ -233,10 +233,7 @@ const Top = styled.div`
     justify-content: center;
   }
 `;
-const Reply = styled.span`
-  margin-left: 10px;
-  margin-top: 20px;
-`;
+
 const Bottom = styled.div`
   height: 250px;
   width: 810px;
