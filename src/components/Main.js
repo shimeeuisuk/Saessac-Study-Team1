@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "../css/Main.css";
+import WeatherImgLoading from "./WeatherImgLoading";
 
 const { useState, useEffect } = require("react");
 
@@ -61,10 +62,7 @@ function Main() {
       <div className="main-container">
         <div className="main-weather">
           {loading ? (
-            <img
-              className="main-top__loading"
-              src="https://lifeedu.skuniv.ac.kr/wp-content/uploads/245_696_146_%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94.gif"
-            />
+            <WeatherImgLoading />
           ) : datas.weather[0].main === "Clear" ? (
             <div className="main-top__weather">
               <span>
