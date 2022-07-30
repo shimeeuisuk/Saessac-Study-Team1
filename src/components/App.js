@@ -1,5 +1,5 @@
 import "../css/App.css";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Signup from "../page/Sign/Signup";
 import Signin from "./Signin";
 import Main from "./Main";
@@ -17,6 +17,7 @@ import { getLoginCookie } from "../lib/cookie";
 import Loading from "../components/Loading";
 import Weather from "./Weather";
 import Chat from "./Chat";
+import Footer from "./Footer";
 
 const axios = require("axios");
 
@@ -84,24 +85,7 @@ function App() {
       {viewModal ? (
         <Signin viewModal={viewModal} setModal={setModal}></Signin>
       ) : null}
-      <Link to="/">
-        <p>메인</p>
-      </Link>
-      <Link to="/signup">
-        <p>회원가입</p>
-      </Link>
-      <Link to="/mypage">
-        <p>마이페이지</p>
-      </Link>
-      <Link to="/postlist">
-        <p>글 목록</p>
-      </Link>
-      <Link to="/postwrite">
-        <p>글 작성</p>
-      </Link>
-      <Link to="/chat">
-        <p>댓글</p>
-      </Link>
+      <Footer />
     </div>
   );
 }

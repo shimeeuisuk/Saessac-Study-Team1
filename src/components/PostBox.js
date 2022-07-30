@@ -6,15 +6,18 @@ import axios from "axios";
 
 export default function PostBox({ data }) {
   const [totalcomment, setTotalComment] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
       .get(`http://34.168.215.145/topiccomments/count/${data.tid}`)
       .then((res) => {
         setTotalComment(res.data.count);
+        setLoading(false);
       });
   }, [data.tid]);
 
+  if (loading) return null;
   return (
     <>
       <Container>
