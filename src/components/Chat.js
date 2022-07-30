@@ -176,7 +176,6 @@ const CommentLengths = styled.div`
 `;
 export const ChatContainer = styled.div`
   width: 810px;
-  height: 600px;
   background: white;
 `;
 
