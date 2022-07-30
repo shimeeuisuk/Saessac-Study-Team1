@@ -14,7 +14,9 @@ const RequireAuth = ({ children, option, setModal }) => {
   } else if(option) {
     if(state.loginState) return children
     else {
-      setModal(true)
+      setTimeout(() => {
+        setModal(true)
+      }, 1000)
       return <Navigate to={'/'} state={location}></Navigate>
     }
   } else {
