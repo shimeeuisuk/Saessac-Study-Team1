@@ -95,7 +95,7 @@ export const SigninBox = styled(SignBox)`
 export const SignupBox = styled(SignBox)`
   width: 500px;
   height: 515px;
-
+  
   > div.signupTitle {
     font-weight: 600;
     font-size: 25px;
@@ -153,5 +153,13 @@ export const SignupBox = styled(SignBox)`
     font-weight: 600;
     font-size: 16px;
     margin: 30px auto;
+  }
+
+  > p {
+    color: #B0ABAB;
+  }
+
+  > p > a {
+    color: #000;
   }
 `
