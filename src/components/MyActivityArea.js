@@ -26,7 +26,7 @@ export default function MyActivityArea({locations, setLocations, locationList}){
 
   axios.delete(`http://34.168.215.145/favoritlocation?lid=${deletedLid}`, {headers: {Authorization: getLoginCookie()}})
   .then((res) => {
-    console.log('주활동지역 삭제완료');
+    // console.log('주활동지역 삭제완료');
   })
   } 
 
