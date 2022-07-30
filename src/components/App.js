@@ -18,7 +18,6 @@ import Loading from "../components/Loading";
 import Weather from "./Weather";
 import Chat from "./Chat";
 import Footer from "./Footer";
-import { useLocation } from 'react-router-dom';
 
 const axios = require("axios");
 
@@ -26,7 +25,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const [viewModal, setModal] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     (async () => {
@@ -39,7 +37,7 @@ function App() {
       setLoading(false);
     })();
   }, []);
-  console.log(location.state)
+
   if (loading) return <Loading></Loading>;
 
   return (
