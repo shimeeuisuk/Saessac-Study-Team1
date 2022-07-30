@@ -7,11 +7,21 @@ import PostListLocation from "components/PostLIstLocation";
 import { IoCaretBack } from "react-icons/io5";
 import { IoCaretForward } from "react-icons/io5";
 import axios from "axios";
+import useScroll from "util/useScroll";
+import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { select } from "action/action";
+
 export default function PostListPage() {
-  const [selectedTab, setSelectedTab] = useState(0);
   const [page, setPage] = useState(1);
   const [totalTopic, setTotalTopic] = useState(0);
   const totalPage = Math.ceil(totalTopic / 6);
+  const loaction = useLocation();
+  const selectedTab = useSelector((state) => state.selectedTabReducer);
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+
+  useScroll();
 
   useEffect(() => {
     axios
@@ -22,10 +32,11 @@ export default function PostListPage() {
       )
       .then((res) => {
         setTotalTopic(res.data.count);
+        setLoading(false);
       });
   }, [selectedTab]);
   function clickhandler(num) {
-    setSelectedTab(num);
+    dispatch(select(num));
   }
   function PageIncrease() {
     setPage(page + 1);
@@ -33,6 +44,7 @@ export default function PostListPage() {
   function PageDecrease() {
     setPage(page - 1);
   }
+  if (loading) return null;
   return (
     <Container>
       <Top>
@@ -92,7 +104,6 @@ export default function PostListPage() {
 //styled components
 const Container = styled.div`
   width: 100%;
-  height: 1024px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -233,7 +244,6 @@ const Transition = styled.div`
 `;
 
 const List = styled.div`
-  height: 765px;
   width: 923px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(455px, 1fr));

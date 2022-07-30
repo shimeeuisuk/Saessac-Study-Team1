@@ -16,12 +16,10 @@ const Chat = ({ detail, tid, type }) => {
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
-  console.log(tid);
   useEffect(() => {
     getComments();
   }, [page]);
 
-  console.log(state);
   const getComments = () => {
     axios
       .get(`http://34.168.215.145/topiccomments/${tid}`, {
