@@ -30,7 +30,6 @@ function MyPage() {
     axios.get((`http://34.168.215.145/user/`), {headers: {Authorization: getLoginCookie()}})
     .then((res) => {
       setIsLoading(true);
-      console.log(res.data.data);
       setUser(res.data.data);
       setUserID(res.data.data.userID);
       setNickname(res.data.data.nickName);
@@ -49,7 +48,6 @@ function MyPage() {
     .then((res) => {
       setIsLoading(true);
       setMyPosts(res.data);
-      console.log(res.data);
       setIsLoading(false);
     })
   }, [])
