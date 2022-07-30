@@ -103,7 +103,7 @@ const Chat = ({ detail, tid, type }) => {
                 </p>
                 <p className="coment">{e.topicComent}</p>
               </div>
-              {state.loginState && state.data.userid === detail.userID ? (
+              {state.loginState && state.data.userid === e.userID ? (
                 <BsTrashes onClick={() => deleteHandler(e.tcid)}>
                   <BsTrash />
                 </BsTrashes>
