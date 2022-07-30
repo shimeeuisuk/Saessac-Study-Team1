@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
-import { FaCommentDots } from "react-icons/fa";
 import { FcSettings } from "react-icons/fc";
 import { useSelector } from "react-redux";
 import Chat from "components/Chat";
@@ -100,10 +99,10 @@ const Container = styled.div`
 
 const Head = styled.div`
   display: flex;
+  justify-content: space-between;
   height: 62px;
   width: 810px;
   .button {
-    margin-left: 490px;
     margin-top: 15px;
     width: 127px;
     height: 42px;
@@ -277,4 +276,5 @@ const Content = styled.div`
   justify-content: start;
   overflow-y: auto;
   display: flex;
+  text-align: left;
 `;
