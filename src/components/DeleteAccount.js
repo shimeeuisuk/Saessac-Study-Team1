@@ -11,7 +11,7 @@ export default function DeleteAccount(){
     setModal(!modal);
   }
   const deleteAccountHandler = () => {
-    axios.delete((`http://34.168.215.145/user/`), {headers: {Authorization: getLoginCookie()}})
+    axios.delete((`https://saessac.kro.kr:80/user/`), {headers: {Authorization: getLoginCookie()}})
     .then((res) => {
       console.log('계정삭제완료'); 
     })

@@ -27,7 +27,7 @@ function Signin({viewModal, setModal}) {
 
   const trySignin = async () => {
     try{
-      const res = await axios.post('http://34.168.215.145/user/login', 
+      const res = await axios.post('https://saessac.kro.kr:80/user/login', 
       {
         userid: datas.userid,
         userpassword: datas.userpassword

@@ -24,7 +24,7 @@ export default function PostListPage() {
   useEffect(() => {
     axios
       .get(
-        `http://34.168.215.145/topic/list/count?type=${
+        `https://saessac.kro.kr:80/topic/list/count?type=${
           selectedTab === 0 ? "friend" : "location"
         }`
       )

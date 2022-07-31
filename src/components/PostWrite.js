@@ -5,7 +5,7 @@ export default function PostWrite() {
   const [location, setLocation] = useState([]);
   useEffect(() => {
     (async () => {
-      const res = await axios.get("http://34.168.215.145/location/list");
+      const res = await axios.get("https://saessac.kro.kr:80/location/list");
       setLocation([...res.data]);
     })();
   }, []);

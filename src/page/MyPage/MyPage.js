@@ -27,7 +27,7 @@ function MyPage() {
 
   useEffect( () => {
     // 회원정보 조회
-    axios.get((`http://34.168.215.145/user/`), {headers: {Authorization: getLoginCookie()}})
+    axios.get((`https://saessac.kro.kr:80/user/`), {headers: {Authorization: getLoginCookie()}})
     .then((res) => {
       setIsLoading(true);
       setUser(res.data.data);
@@ -38,13 +38,13 @@ function MyPage() {
       setIsLoading(false);
     })
     // 지역리스트 조회
-    axios.get((`http://34.168.215.145/location/list`), {headers: {Authorization: getLoginCookie()}})
+    axios.get((`https://saessac.kro.kr:80/location/list`), {headers: {Authorization: getLoginCookie()}})
     .then((res) => {
       const data = res.data;
       setLocationList(data);
     })
     // 내가 쓴 글보기
-    axios.get((`http://34.168.215.145/user/topic/`), {headers: {Authorization: getLoginCookie()}})
+    axios.get((`https://saessac.kro.kr:80/user/topic/`), {headers: {Authorization: getLoginCookie()}})
     .then((res) => {
       setIsLoading(true);
       setMyPosts(res.data);

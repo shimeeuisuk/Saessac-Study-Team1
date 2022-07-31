@@ -9,7 +9,7 @@ export default function PostListLocation({ page }) {
   useEffect(() => {
     axios
       .get(
-        `http://34.168.215.145/topic/list?sort=desc&type=location&offset=${offset}&limit=6`
+        `https://saessac.kro.kr:80/topic/list?sort=desc&type=location&offset=${offset}&limit=6`
       )
       .then((res) => {
         setLocationlist([...res.data]);

@@ -10,7 +10,7 @@ export default function PostBox({ data }) {
 
   useEffect(() => {
     axios
-      .get(`http://34.168.215.145/topiccomments/count/${data.tid}`)
+      .get(`https://saessac.kro.kr:80/topiccomments/count/${data.tid}`)
       .then((res) => {
         setTotalComment(res.data.count);
         setLoading(false);
@@ -54,7 +54,7 @@ export default function PostBox({ data }) {
           <div className="bottomleft">
             <Img
               className="communitypage-bottom__thumb"
-              src={`http://34.168.215.145/${data.userPicture}`}
+              src={`https://saessac.kro.kr:80/${data.userPicture}`}
             />
             <span className="usernickname">{data.nickName}</span>
           </div>

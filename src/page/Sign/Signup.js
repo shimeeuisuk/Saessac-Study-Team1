@@ -34,7 +34,7 @@ function Signup() {
   const checkUserID = async () => {
     try{
       if(isValidId(datas.userid) && datas.userid !== ""){
-        const res = await axios.get(`http://34.168.215.145/user/checkid?userid=${datas.userid}`)
+        const res = await axios.get(`https://saessac.kro.kr:80/user/checkid?userid=${datas.userid}`)
         const data = res.data
         
         if(data.msg){
@@ -77,7 +77,7 @@ function Signup() {
   const trySignup = () =>{
     if(isvalidreq.includes(false))console.log('만족못함')
     else{
-      axios.post('http://34.168.215.145/user/insert', {
+      axios.post('https://saessac.kro.kr:80/user/insert', {
         userid: datas.userid,
         userpassword: datas.userpassword
       })

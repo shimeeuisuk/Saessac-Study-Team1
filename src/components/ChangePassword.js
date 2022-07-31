@@ -61,7 +61,7 @@ export default function ChangePassword(){
       return;
     }
     if(currentPw !== newPw && newPw === newPwCheck) {
-    axios.put(`http://34.168.215.145/user/password/`, password, {headers: {Authorization: getLoginCookie()}})
+    axios.put(`https://saessac.kro.kr:80/user/password/`, password, {headers: {Authorization: getLoginCookie()}})
     .then((res) => {
       console.log('비번변경');
     })

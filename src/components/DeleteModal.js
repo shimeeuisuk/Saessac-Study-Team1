@@ -12,7 +12,7 @@ export default function DeleteModal({ data, deleteModal, setDeleteModal }) {
 
   const DeletePost = () => {
     axios
-      .delete(`http://34.168.215.145/topic/${data.tid}`, {
+      .delete(`https://saessac.kro.kr:80/topic/${data.tid}`, {
         headers: { Authorization: getLoginCookie() },
       })
       .then((res) => {

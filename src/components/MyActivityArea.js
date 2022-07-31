@@ -24,7 +24,7 @@ export default function MyActivityArea({locations, setLocations, locationList}){
   })
   setLocations(restTags);
 
-  axios.delete(`http://34.168.215.145/favoritlocation?lid=${deletedLid}`, {headers: {Authorization: getLoginCookie()}})
+  axios.delete(`https://saessac.kro.kr:80/favoritlocation?lid=${deletedLid}`, {headers: {Authorization: getLoginCookie()}})
   .then((res) => {
     // console.log('주활동지역 삭제완료');
   })
@@ -73,7 +73,7 @@ export default function MyActivityArea({locations, setLocations, locationList}){
       let data = {
         locationid:addedLocation[0].lid
       }
-      axios.post(`http://34.168.215.145/favoritlocation/insert`, data, {headers: {Authorization: getLoginCookie()}} )
+      axios.post(`https://saessac.kro.kr:80/favoritlocation/insert`, data, {headers: {Authorization: getLoginCookie()}} )
       .then((res) => {
         console.log('주활동지역 등록완료');
       })
