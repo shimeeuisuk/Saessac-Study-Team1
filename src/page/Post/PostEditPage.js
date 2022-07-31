@@ -34,7 +34,7 @@ export default function PostEditPage() {
   };
   useEffect(() => {
     (async () => {
-      const res = await axios.get("http://34.168.215.145/location/list");
+      const res = await axios.get("https://saessac.kro.kr:80/location/list");
       setLocation([...res.data]);
     })();
   }, []);
@@ -52,7 +52,7 @@ export default function PostEditPage() {
     console.log(selected);
     console.log(putForm);
     axios
-      .put(`http://34.168.215.145/topic/${data.tid}`, putForm, {
+      .put(`https://saessac.kro.kr:80/topic/${data.tid}`, putForm, {
         headers: { Authorization: getLoginCookie() },
       })
       .then((msg) => {
@@ -66,7 +66,7 @@ export default function PostEditPage() {
       <Box>
         <div className="newpost">글 수정</div>
         <Top>
-          <img src={`http://34.168.215.145/${data.userPicture}`} />
+          <img src={`https://saessac.kro.kr:80/${data.userPicture}`} />
           <span className="usernickname">{data.nickName}</span>
           {data.type === "friend" ? (
             <div className={recruit} onClick={recruitHandler}>

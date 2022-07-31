@@ -17,7 +17,7 @@ export default function PostDetail() {
   useScroll();
 
   useEffect(() => {
-    axios.get(`http://34.168.215.145/topic/${params.id}`).then((res) => {
+    axios.get(`https://saessac.kro.kr:80/topic/${params.id}`).then((res) => {
       const data = res.data[0];
       setDetail({ ...data });
       setLoading(false);
@@ -53,7 +53,7 @@ export default function PostDetail() {
         <Top>
           <div className="left">
             {loading ? null : (
-              <img src={`http://34.168.215.145/${detail.userPicture}`} />
+              <img src={`https://saessac.kro.kr:80/${detail.userPicture}`} />
             )}
           </div>
           <div className="middle">

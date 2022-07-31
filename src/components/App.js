@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get("http://34.168.215.145/user/checklogin", {
+      const res = await axios.get("https://saessac.kro.kr:80/user/checklogin", {
         headers: { authorization: getLoginCookie() },
       });
       dispatch(setSignState(res.data.msg));

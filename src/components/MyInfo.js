@@ -26,7 +26,7 @@ export default function MyInfo({userID, nickname, introduce, setNickname, setInt
   }
 
   const submitNickname = () => {
-    axios.put(`http://34.168.215.145/user/`, data, {headers: {Authorization: getLoginCookie()}} )
+    axios.put(`https://saessac.kro.kr:80/user/`, data, {headers: {Authorization: getLoginCookie()}} )
     .then((res) => {
       console.log('put작동');
     })

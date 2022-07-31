@@ -45,7 +45,7 @@ export default function MyProfileImg({user}) {
           'content-type': 'multipart/form-data'
         }
       };
-      axios.post('http://34.168.215.145/user/picture', formData, config)
+      axios.post('https://saessac.kro.kr:80/user/picture', formData, config)
       .then((res) => {
         console.log('서버에 이미지 등록완료');
       })
@@ -59,7 +59,7 @@ export default function MyProfileImg({user}) {
 
   // 이미지 삭제
   const deleteImgFile = () => {
-    axios.put(`http://34.168.215.145/user/picture`, {}, {headers: {Authorization: getLoginCookie()}} )
+    axios.put(`https://saessac.kro.kr:80/user/picture`, {}, {headers: {Authorization: getLoginCookie()}} )
     .then((res) => {
       console.log('이미지 삭제 완료');
     })
@@ -72,7 +72,7 @@ export default function MyProfileImg({user}) {
   return (
       <div className="mypage-container__topleft">
         {/* preview가 빈 문자열이라면 디폴트이미지를, 빈문자열이 아니라면 preview이미지를 */}
-        <img src={preview !== undefined ? preview : `http://34.168.215.145/${user.userPicture}`}
+        <img src={preview !== undefined ? preview : `https://saessac.kro.kr:80/${user.userPicture}`}
         width="50px" alt="profile image" />
         <input 
               ref={imgInput} 

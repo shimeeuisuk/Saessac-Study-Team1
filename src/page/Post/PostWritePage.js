@@ -25,7 +25,7 @@ export default function PostWritePage() {
 
   useEffect(() => {
     (async () => {
-      const res = await axios.get("http://34.168.215.145/location/list");
+      const res = await axios.get("https://saessac.kro.kr:80/location/list");
       setLocation([...res.data]);
     })();
   }, []);
@@ -37,7 +37,7 @@ export default function PostWritePage() {
 
     axios
       .post(
-        "http://34.168.215.145/topic/insert",
+        "https://saessac.kro.kr:80/topic/insert",
         {
           topictitle: title,
           topiccontents: content,
@@ -57,7 +57,7 @@ export default function PostWritePage() {
       <Box>
         <div className="newpost">새 글 쓰기</div>
         <Top>
-          <img src={`http://34.168.215.145/${state.data.userPicture}`} />
+          <img src={`https://saessac.kro.kr:80/${state.data.userPicture}`} />
           <span className="usernickname">{state.data.nickname}</span>
         </Top>
         <Bottom>

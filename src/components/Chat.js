@@ -22,7 +22,7 @@ const Chat = ({ detail, tid, type }) => {
 
   const getComments = () => {
     axios
-      .get(`http://34.168.215.145/topiccomments/${tid}`, {
+      .get(`https://saessac.kro.kr:80/topiccomments/${tid}`, {
         headers: { Authorization: getLoginCookie() },
       })
       .then((res) => {
@@ -34,7 +34,7 @@ const Chat = ({ detail, tid, type }) => {
 
   const deleteHandler = (tcid) => {
     axios
-      .delete(`http://34.168.215.145/topiccomments/${tcid}`, {
+      .delete(`https://saessac.kro.kr:80/topiccomments/${tcid}`, {
         headers: { Authorization: getLoginCookie() },
       })
       .then((res) => {
@@ -51,7 +51,7 @@ const Chat = ({ detail, tid, type }) => {
     };
     if (e.key === "Enter") {
       axios
-        .post(`http://34.168.215.145/topiccomments/insert`, data, {
+        .post(`https://saessac.kro.kr:80/topiccomments/insert`, data, {
           headers: { Authorization: getLoginCookie() },
         })
         .then((res) => {
@@ -67,7 +67,7 @@ const Chat = ({ detail, tid, type }) => {
       topiccomment: textAreaComment,
     };
     axios
-      .post(`http://34.168.215.145/topiccomments/insert`, data, {
+      .post(`https://saessac.kro.kr:80/topiccomments/insert`, data, {
         headers: { Authorization: getLoginCookie() },
       })
       .then((res) => {
@@ -94,7 +94,7 @@ const Chat = ({ detail, tid, type }) => {
           {comment.slice(offset, offset + limit).map((e, i) => (
             <ChatForm key={i}>
               <div className="mapp">
-                <img src={`http://34.168.215.145/${e.userPicture}`} />
+                <img src={`https://saessac.kro.kr:80/${e.userPicture}`} />
               </div>
               <div className="text">
                 <p className="nickname">{e.nickname}</p>
@@ -114,7 +114,7 @@ const Chat = ({ detail, tid, type }) => {
         {state.loginState ? (
           <ChatInputContainer>
             <div className="img">
-              <img src={`http://34.168.215.145/${state.data.userPicture}`} />
+              <img src={`https://saessac.kro.kr:80/${state.data.userPicture}`} />
               <p>{state.data.nickname}</p>
             </div>
 
